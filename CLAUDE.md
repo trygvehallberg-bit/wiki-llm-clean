@@ -387,7 +387,7 @@ Part A says "minimum work, nothing speculative" and "touch only what you must." 
 ## B.6 Dedup and multi-colleague
 
 - If two `raw/` files describe the same underlying thing, both files stay (raw is immutable). The `wiki/sources/` page is shared: same slug, both paths appear in the `source_path:` list (which is always a list — see B.3), body merges both reads with a note about the duplication.
-- Git history is the multi-colleague audit trail. Commit each operation as a unit (see B.7) so colleagues can review by reading commits.
+- Colleagues share the live vault through Obsidian Sync. Git history is a secondary audit trail of the snapshots you commit — taken when you ask, not one commit per operation (see B.7).
 
 ## B.7 Commits
 
