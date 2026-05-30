@@ -32,6 +32,7 @@ Conversational, a few at a time, with the suggested options. The first is the on
 
 - Write the answers into `meta/vault-config.md` (wiki language, hovedtags, personal-folder name, vault name, source-type emphasis).
 - **If the wiki language is not Norwegian:** generate `meta/vaultos-lang-<xx>.md` from the pattern in `meta/vaultos-lang-no.md` (section headings, infobox labels, mother-tongue prose rules for that language) and update the `@import` line in CLAUDE.md.
+- **Regenerate the Karpathy seed in the chosen language.** The shipped seed (`wiki/sources/Karpathy - LLM Wiki.md` + the `Andrej Karpathy` entity) is in Norwegian. If the wiki language differs, re-ingest `raw/articles/2026-05-22_llm_wiki_karpathy.md` into the chosen language, replacing those two pages — and let the user watch: it doubles as their first live `ingest` demo.
 - Update `wiki/tags.md` (chosen hovedtags) and the `README.md` title (vault name).
 - **If they chose meta translation:** translate CLAUDE.md, the skills, and the meta docs into the wiki language. Flag that this is the slower path.
 - **If they want a personal layer:** create the folder under the chosen name with a short README explaining §B.10 (outside wiki ops; one-way `personal → wiki` linking only).
