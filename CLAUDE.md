@@ -368,9 +368,9 @@ The expanded rationale and portable recipe live in `meta/synthesis-generation-re
 
 The fields record *the filing event*, not edit history. Subsequent edits leave them alone; only re-filing from scratch resets them.
 
-### B.4.2 Skill preflight and skill commits
+### B.4.2 Git operations and skill commits
 
-**Preflight (silent):** Before invoking a `.claude/skills/<skill>/` skill, `git fetch` and pull if `origin/main` has updates to that skill's files (`git diff --quiet origin/main -- .claude/skills/<skill>/` returns non-zero). Silent on both branches — no narration when up to date, no narration when auto-pulling. This is the only automatic git operation.
+**No automatic git.** VaultOS never touches a remote on its own. Normal operations — ingest, lint, query, synthesis — do **zero** git: wiki content syncs through Obsidian Sync, and git is reserved for explicit commits you ask for and the curated `update` operation. You are never pinging GitHub involuntarily just by using the vault. Update-awareness is decoupled: run `update` when you want it, or set up a routine that checks on a cadence (see README → Updates / Automating ingest) — never bound to a per-action preflight.
 
 **Commits:** Do not auto-commit or auto-push during normal vault work. When files Obsidian Sync does not handle (`.claude/skills/`, dotfiles like `.gitattributes`/`.gitignore`, anything in `.gitignore` you've deliberately edited) have been changed in this session, propose a commit at session end — do not commit silently. Everything else flows through Obsidian Sync.
 
@@ -406,7 +406,7 @@ The agent's job is to capture current state, not to curate a clean narrative acr
 
 - **No auto-commit.** Nothing commits unless the user asks.
 - **Single-source ingest doesn't trigger a commit on its own** (per B.5).
-- **The only auto-git operation** is the silent skill-preflight `git fetch + pull` per B.4.2.
+- **No automatic git operations.** VaultOS never touches a remote on its own; update-checking is explicit/curated (see B.4.2).
 
 ### Message format
 
