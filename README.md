@@ -110,3 +110,16 @@ This vault runs on **VaultOS** — a portable system layer (CLAUDE.md, the skill
 
 Maintainers *push* improvements to the upstream; vaults *pull* them — git is pull-based downstream, so nothing in your vault changes unless you run `update`.
 
+**You're never obligated, and you don't take it wholesale.** `update` is a conversation with your AI tool, not a sync: walk the changelog together, pull in what fits, adapt what's close, skip the rest. Maintaining VaultOS is curating, not merging.
+
+**Knowing an update exists:** git doesn't notify clones. Either run `update` (it checks the upstream when run), *Watch* the repo on GitHub for email on new commits (needs an account), or let a routine check periodically (below). **Pulling** a *private* upstream needs a GitHub account with access granted; a *public* upstream anyone can pull without one.
+
+## Automating ingest (optional)
+
+Prefer not to trigger ingest by hand? Set up a **routine** — a scheduled task in Codex, Claude Code, or Cowork — that runs `ingest` on a cadence (hourly, daily). In automated mode:
+
+- It runs **non-interactively**: no plan-gate, no per-file questions. It works through `inbox/` one file at a time.
+- Mind the **token budget**: cap each run, and have it **skip rather than process** anything oversized or ambiguous — leaving those in `inbox/` for you to review and trigger by hand. A sane default: skip single files over ~15k tokens (long transcripts, big exports) and stop after a handful of items per run; everything skipped stays in the inbox with a one-line note in `wiki/log.md`.
+- Web clips (Web Clipper → `inbox/Clippings/`) are the ideal feed — small, steady, and they pile up without nagging you.
+- A routine can pull double duty: have it also check the VaultOS upstream and tell you if an update exists. It won't apply anything — updates stay curated and on your terms.
+
