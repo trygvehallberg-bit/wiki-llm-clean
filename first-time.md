@@ -50,4 +50,6 @@ Offer two paths:
 - **Use it as-is** — "You're set. Drop a source in `inbox/` and say `ingest`."
 - **Make it your own** — offer to walk them through the schema (CLAUDE.md §B.3), conventions, skills, tone, and categories, and co-develop their clone in dialogue. It's their vault, their rules.
 
+Also mention, briefly: **VaultOS updates are optional.** They can run the `update` operation anytime to pull improvements from upstream — curated, adopt/adapt/skip per change, never touching their content — or ignore updates forever; the vault works either way. Details in README → Updates.
+
 Then set `todo.md` and `handoff.md` back to "No ongoing task" (note onboarding complete), and **offer to delete this `first-time.md`**.

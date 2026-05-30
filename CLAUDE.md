@@ -208,11 +208,11 @@ tags: []                          # optional; draw from wiki/tags.md, see B.3
 Two naming conventions, by kind:
 
 - **All wiki pages use natural form** — capitalized appropriately for the page language (sentence case for concepts, proper case for entities), spaces preserved, ASCII. Why: every folder the user navigates should read like natural language, not like a URL bar.
-  - Entities: `Vivian Balakrishnan.md`, `Nano Claw.md`, `AIE Singapore 2026.md`.
-  - Concepts: `Second brain workflows.md`, `Neuro-symbolic AI.md`, `AI democratization.md`.
-  - Sources: `<Speaker/Author> - <Topic>.md` for talks (e.g., `Balakrishnan - Second brain workflows.md`); `<Title>.md` for papers/articles (add `(Author Year)` for disambiguation when titles collide).
+  - Entities: `Ada Lovelace.md`, `HAL 9000.md`, `RoboCon 2027.md`.
+  - Concepts: `Analytical engines.md`, `Recursive self-improvement.md`, `Knowledge compounding.md`.
+  - Sources: `<Speaker/Author> - <Topic>.md` for talks (e.g., `Lovelace - Analytical engines.md`); `<Title>.md` for papers/articles (add `(Author Year)` for disambiguation when titles collide).
   - Syntheses: descriptive title in sentence case (e.g., `Attention vs Mamba comparison.md`). Date-stamped exception: `Lint - YYYY-MM-DD.md`, `Reingest - <topic> - YYYY-MM-DD.md`.
-- **Sources need a distinguishing element** — speaker/author prefix for talks, title for papers — because a source about "Second brain workflows" would otherwise collide with the concept page of the same name. Sources are documents about a topic, not the topic itself.
+- **Sources need a distinguishing element** — speaker/author prefix for talks, title for papers — because a source about "Analytical engines" would otherwise collide with the concept page of the same name. Sources are documents about a topic, not the topic itself.
 - **Slugs survive in two places only**: `raw/<type>/<YYYY-MM-DD>_<slug>.md` (machine-organized archive, agent rarely navigates) and tags (labels, not folders).
 - `wiki/syntheses/Lint - YYYY-MM-DD.md` and `wiki/syntheses/Reingest - <topic> - YYYY-MM-DD.md` — date-stamped exception for periodic outputs (natural form, consistent with other syntheses).
 - `raw/<type>/<YYYY-MM-DD>_<slug>.md` — date-prefixed canonical form. ISO 8601 hyphens in the date, underscore between date and slug, underscores within the slug. This is the **output** of triage, not the input. Humans drop files into `inbox/` with any name; the agent generates this canonical path during the triage phase of `/wiki-ingest`. Raw filenames always use slug form regardless of source kind.
@@ -221,14 +221,14 @@ Two naming conventions, by kind:
 
 **Derivation rules:**
 - For entities: drop honorifics (`Dr`, `Prof`, `Mr`), preserve given-name + surname order and capitalization, keep accents in ASCII-safe form where reasonable. Org/product/event names stay as commonly written.
-- For concepts: sentence case in the page language (first word capitalized + proper nouns/acronyms). `Second brain workflows`, `AI democratization`, `Neuro-symbolic AI`. Avoid title case (`Second Brain Workflows`) — concepts aren't titles.
-- For source pages (transcripts): `<Speaker surname> - <Topic in sentence case>.md`. Drop honorifics. Topic is short — not the full talk title. When the literal title is over-long or multi-clause, summarize the topic from the talk's content (e.g., `Alyx planning states, large JSON abstractions, and reliable agent checkpoints` → `Production lessons from building Alyx`). When `<Surname> - <Topic>` would collide with an existing source, use `<Full given name> <Surname> - <Topic>` instead (e.g., `Heng Hong Lee - …`, `Jun Yu Tan - …`).
+- For concepts: sentence case in the page language (first word capitalized + proper nouns/acronyms). `Analytical engines`, `Recursive self-improvement`, `Knowledge compounding`. Avoid title case (`Analytical Engines`) — concepts aren't titles.
+- For source pages (transcripts): `<Speaker surname> - <Topic in sentence case>.md`. Drop honorifics. Topic is short — not the full talk title. When the literal title is over-long or multi-clause, summarize the topic from the talk's content (e.g., `Caching strategies, retry semantics, and idempotent writes in distributed queues` → `Reliability lessons for distributed queues`). When `<Surname> - <Topic>` would collide with an existing source, use `<Full given name> <Surname> - <Topic>` instead (e.g., `Ada Lovelace - …`, `Alan Turing - …`).
 - For source pages (papers/articles): `<Title in sentence case>.md`. Append `(Author Year)` only if needed to disambiguate.
 - For syntheses: descriptive name in sentence case; dated outputs use `Lint - YYYY-MM-DD.md` and `Reingest - <topic> - YYYY-MM-DD.md`.
 - For raw filenames and tags (the only remaining slug contexts): lowercase, underscore-separated, ASCII. Strip articles ("the", "a") if the slug gets long. No trailing punctuation. (Hyphens are reserved for ISO 8601 dates and grammatical compounds in titles like `AI-native`, `sim-to-real`.)
 - **Frontmatter is authoritative.** If the raw file has a `title:` field, derive the name (or slug) from it. Fall back to the filename only if no title is present.
 
-Same-source dedup still works under this rule: ingesting the Balakrishnan transcript twice produces the same source filename (`Balakrishnan - Second brain workflows.md`) and the same entity name (`Vivian Balakrishnan.md`) — collision check happens at the filename layer in both cases.
+Same-source dedup still works under this rule: ingesting the Lovelace transcript twice produces the same source filename (`Lovelace - Analytical engines.md`) and the same entity name (`Ada Lovelace.md`) — collision check happens at the filename layer in both cases.
 
 ### Tags
 

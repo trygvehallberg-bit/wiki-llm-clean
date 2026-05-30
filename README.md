@@ -97,6 +97,16 @@ You never write to `wiki/` directly. The AI is the sole author there. Humans onl
 
 ## Conventions in one breath
 
-Wiki page names are natural-form English (`Vivian Balakrishnan.md`, `Second brain workflows.md`, `Balakrishnan - Second brain workflows.md`). Raw files and tags use lowercase, underscore-separated slugs (`vivian_balakrishnan`, `second_brain_workflows`). Sources prefix with `<Speaker/Author> -` so they don't collide with concept pages of the same name. Wikilinks use the natural form: `[[Vivian Balakrishnan]]`, not `[[vivian_balakrishnan]]`.
+Wiki page names are natural-form English (`Ada Lovelace.md`, `Analytical engines.md`, `Lovelace - Analytical engines.md`). Raw files and tags use lowercase, underscore-separated slugs (`ada_lovelace`, `analytical_engines`). Sources prefix with `<Speaker/Author> -` so they don't collide with concept pages of the same name. Wikilinks use the natural form: `[[Ada Lovelace]]`, not `[[ada_lovelace]]`.
 
 Callouts in source pages (`> [!quote]`, `> [!important]`, `> [!warning]`, etc.) are used sparingly — 2–5 per page max, only where they convey semantic type, not as decoration.
+
+## Updates (optional)
+
+This vault runs on **VaultOS** — a portable system layer (CLAUDE.md, the skills, the `meta/` schema docs) maintained in an upstream template repo. Keeping current with VaultOS is **entirely optional**:
+
+- **Skip it.** Your vault works indefinitely without ever updating; your content and config are never touched.
+- **Pull it.** Run the `update` operation whenever you like. The agent fetches the latest VaultOS core from upstream, shows a plain-language changelog — big changes explained in prose, small ones as bullets, bugfixes as a brief overview — and you decide each change: **adopt**, **adapt** (take as inspiration and tweak), or **skip**. It only ever touches the system core — never your wiki content, your config, or the onboarding wizard.
+
+Maintainers *push* improvements to the upstream; vaults *pull* them — git is pull-based downstream, so nothing in your vault changes unless you run `update`.
+
