@@ -1,0 +1,236 @@
+/* home-grid.css
+ *
+ * Lays the six top-level tag callout-cards on `wiki/home.md` out as a responsive grid.
+ * Activated by `cssclasses: [card-grid]` in the note's frontmatter.
+ * The companion `wide` class (Minimal theme) removes the readable-line-length
+ * constraint so the grid can use the full pane width.
+ *
+ * Layout (responds to pane width via container queries, not viewport — so
+ * opening/closing sidebars on desktop reflows correctly):
+ *   default      → 1 column (mobile, very narrow pane)
+ *   ≥ 640 px     → 2 columns (tablet, narrow desktop pane)
+ *   ≥ 1080 px    → 3 columns (full desktop pane)
+ *
+ * Non-callout blocks (h1, paragraphs, hr, h2, footer) span all columns.
+ *
+ * To enable: Settings → Appearance → CSS snippets → toggle `home-grid`.
+ */
+
+.markdown-preview-view.card-grid {
+  container-type: inline-size;
+}
+
+/* Hide the Properties panel on home.md only — the cssclasses + obsidianUIMode
+   keys are infrastructure, not content the reader needs to see. Scoping by
+   the `card-grid` class means this never affects other notes. */
+.markdown-preview-view.card-grid .metadata-container,
+.markdown-source-view.card-grid .metadata-container {
+  display: none !important;
+}
+
+.markdown-preview-view.card-grid .markdown-preview-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  max-width: none;
+}
+
+@container (min-width: 640px) {
+  .markdown-preview-view.card-grid .markdown-preview-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@container (min-width: 1080px) {
+  .markdown-preview-view.card-grid .markdown-preview-section {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Banner callouts (`> [!banner]`) span the full grid and shed the standard
+   callout chrome — used to wrap the page header (title + intro + search)
+   and footer (vault meta + triage). Spanning works reliably because callouts
+   ARE direct grid children; trying to span h1/p directly fails because
+   newer Obsidian wraps blocks in unnamed divs that CSS can't reliably target. */
+.markdown-preview-view.card-grid .callout[data-callout="banner"],
+.markdown-source-view.card-grid .callout[data-callout="banner"] {
+  grid-column: 1 / -1 !important;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 0.85rem;
+}
+
+/* Newer Obsidian wraps each top-level block in an unnamed <div>, which
+   becomes the grid item — making grid-column on the inner callout a no-op.
+   :has() targets the wrapper directly so banner spanning survives the wrap. */
+.markdown-preview-view.card-grid .markdown-preview-section > div:has(> .callout[data-callout="banner"]),
+.markdown-preview-view.card-grid .markdown-preview-sizer > div:has(> .callout[data-callout="banner"]) {
+  grid-column: 1 / -1 !important;
+}
+
+.markdown-preview-view.card-grid .callout[data-callout="banner"] > .callout-title {
+  display: none;
+}
+
+.markdown-preview-view.card-grid .callout[data-callout="banner"] > .callout-content {
+  padding: 0;
+  font-size: 0.85rem;
+  max-width: 75ch;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* H1 inside the header banner — centered, tighter spacing */
+.markdown-preview-view.card-grid .callout[data-callout="banner"] h1 {
+  text-align: center;
+  margin: 0.5rem auto 0.75rem;
+  border-bottom: none;
+}
+
+.markdown-preview-view.card-grid .callout[data-callout="banner"] h1 {
+  margin-top: 10px;
+}
+
+/* Span the loose footer-only blocks (h1 / p / hr / mod-header / mod-footer)
+   in case any escape the banner wrapping. Best-effort, not load-bearing. */
+.markdown-preview-view.card-grid .markdown-preview-section > :is(
+  h1, h2, h3, h4, h5, h6,
+  p, hr,
+  blockquote:not(.callout),
+  .mod-header, .mod-footer
+) {
+  grid-column: 1 / -1 !important;
+}
+
+.markdown-preview-view.card-grid .callout {
+  margin: 0;
+}
+
+/* Six distinct accent colors for the home.md top-level tag cards. Many themes
+   reuse colors across callout types (tip/important share green; info/abstract
+   share blue) which makes the grid read as fewer cards than there are.
+   Forcing explicit hues here guarantees six visually separable cards. */
+.markdown-preview-view.card-grid .callout[data-callout="tip"]        { --callout-color: 236, 100, 130; } /* pink — Kultur */
+.markdown-preview-view.card-grid .callout[data-callout="info"]       { --callout-color:  80, 140, 220; } /* blue — Vitenskap */
+.markdown-preview-view.card-grid .callout[data-callout="example"]    { --callout-color: 160, 110, 215; } /* violet — AI og software */
+.markdown-preview-view.card-grid .callout[data-callout="success"]    { --callout-color: 235, 170,  55; } /* amber — Familie og økonomi */
+.markdown-preview-view.card-grid .callout[data-callout="important"]  { --callout-color:  90, 185, 110; } /* green — Hus og hage */
+.markdown-preview-view.card-grid .callout[data-callout="question"]   { --callout-color: 220,  95,  95; } /* red — Helse og trening */
+
+/* Equal-height cards within a row — non-banner callouts stretch to fill the
+   grid cell so the row reads as a clean band even when content differs in length.
+   Both wrapper-div and direct-child cases covered for Obsidian-version robustness. */
+.markdown-preview-view.card-grid .callout:not([data-callout="banner"]) {
+  height: 100%;
+}
+
+.markdown-preview-view.card-grid .markdown-preview-section > div:has(> .callout:not([data-callout="banner"])),
+.markdown-preview-view.card-grid .markdown-preview-sizer > div:has(> .callout:not([data-callout="banner"])) {
+  display: flex;
+}
+
+.markdown-preview-view.card-grid .markdown-preview-section > div:has(> .callout:not([data-callout="banner"])) > .callout,
+.markdown-preview-view.card-grid .markdown-preview-sizer > div:has(> .callout:not([data-callout="banner"])) > .callout {
+  flex: 1;
+}
+
+/* Dashboard-density: tighter body text in category cards. Cards now read
+   a touch larger than banner text — the cards are the primary content, the
+   banners are framing. */
+.markdown-preview-view.card-grid .callout:not([data-callout="banner"]) .callout-content {
+  font-size: 0.95em;
+  line-height: 1.45;
+  padding-top: 0.25rem;
+}
+
+.markdown-preview-view.card-grid .callout:not([data-callout="banner"]) .callout-content > p {
+  margin: 0.25rem 0;
+}
+
+/* Tag line in each category card is a compact pill. */
+.markdown-preview-view.card-grid .callout:not([data-callout="banner"]) .callout-content > p:has(code):first-child {
+  margin-bottom: 0.45rem;
+}
+
+.markdown-preview-view.card-grid .callout:not([data-callout="banner"]) .callout-content > p:has(code):first-child code {
+  color: var(--text-accent);
+  background-color: rgba(var(--callout-color), 0.18);
+  border: 1px solid rgba(var(--callout-color), 0.35);
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+}
+
+/* Description paragraph — slightly muted so links and tags remain primary. */
+.markdown-preview-view.card-grid .callout:not([data-callout="banner"]) .callout-content > p:nth-child(2) {
+  color: var(--text-muted);
+  font-size: 0.9em;
+  margin-bottom: 0.4rem;
+}
+
+/* "Største områder" sub-nav list — a touch smaller and tighter than the card body. */
+.markdown-preview-view.card-grid .callout:not([data-callout="banner"]) .callout-content ul {
+  font-size: 0.86em;
+  line-height: 1.4;
+  margin: 0.2rem 0 0;
+  padding-left: 1.15rem;
+}
+
+.markdown-preview-view.card-grid .callout:not([data-callout="banner"]) .callout-content li {
+  margin: 0.12rem 0;
+}
+
+/* Embedded Omnisearch block (```embedded-omnisearch```) spans the full grid,
+   like the banners — otherwise it lands in a single narrow column. Centered,
+   capped width to match the header/footer banners. */
+.markdown-preview-view.card-grid .markdown-preview-section > div:has(.eo-wrap),
+.markdown-preview-view.card-grid .markdown-preview-sizer > div:has(.eo-wrap),
+.markdown-preview-view.card-grid .markdown-preview-section > div:has(.block-language-embedded-omnisearch),
+.markdown-preview-view.card-grid .markdown-preview-section > .block-language-embedded-omnisearch {
+  grid-column: 1 / -1 !important;
+  width: 100%;
+  max-width: 75ch;
+  margin: 0.25rem auto 0.5rem;
+}
+
+/* Bigger card titles. !important + a specific selector to win over the
+   Baseline theme and Style Settings, which both otherwise set the title size.
+   The inner span is forced to 1em so it inherits the container size instead of
+   compounding (and to neutralize any fixed size the theme sets on it). */
+.markdown-preview-view.card-grid .callout:not([data-callout="banner"]) > .callout-title {
+  font-size: 1.4em !important;
+  --callout-title-size: 1.4em;
+}
+
+.markdown-preview-view.card-grid .callout:not([data-callout="banner"]) > .callout-title .callout-title-inner {
+  font-size: 1em !important;
+}
+
+/* Tighten the top: hide the redundant inline note title ("home") — the header
+   banner already names the page — and trim the preview's top padding so the
+   cards rise higher and the empty band up top shrinks. */
+.markdown-preview-view.card-grid .inline-title {
+  display: none !important;
+}
+
+.markdown-preview-view.card-grid .markdown-preview-sizer {
+  padding-top: 0.5rem !important;
+}
+
+.markdown-preview-view.card-grid .callout[data-callout="banner"] h1 {
+  margin-top: 0 !important;
+}
+
+/* Sub-area tags are the label now (the bold title is gone): render the real
+   #tag as a pill, a notch larger, tinted to the card's own accent color. */
+.markdown-preview-view.card-grid .callout:not([data-callout="banner"]) .callout-content li .tag {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: rgb(var(--callout-color));
+  background-color: rgba(var(--callout-color), 0.15);
+  border: 1px solid rgba(var(--callout-color), 0.4);
+  border-radius: 999px;
+  padding: 0.05em 0.5em;
+  text-decoration: none;
+  white-space: nowrap;
+}

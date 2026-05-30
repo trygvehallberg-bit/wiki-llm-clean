@@ -1,0 +1,5 @@
+# Repo-wide line-ending policy.
+# Normalize to LF in the repository; Git on Windows checks out as-is.
+# AI agents and Obsidian both produce LF naturally; this stops PowerShell git
+# from warning about CRLF conversions and prevents false-modified diffs.
+* text=auto eol=lf

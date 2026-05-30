@@ -1,0 +1,188 @@
+/* infobox.css
+ *
+ * Wikipedia-style right-rail sidebar for `> [!infobox]` callouts on
+ * source / entity / concept pages. Default-on per CLAUDE.md B.3.
+ *
+ * Renders the callout as a right-floated card ~320px wide; body text
+ * wraps around it. On narrow panes (mobile, narrow desktop pane) the
+ * float drops and the infobox stacks above the body.
+ *
+ * To enable: Settings → Appearance → CSS snippets → toggle `infobox`.
+ *
+ * Markdown convention inside the callout:
+ *   > [!infobox]
+ *   > **Type** — talk
+ *   > **Speaker** — Surname (org)
+ *   > **Date** — YYYY-MM-DD, venue
+ *   >
+ *   > ## Key claims
+ *   > - Claim 1
+ *   > - Claim 2
+ *   >
+ *   > ## Key terms
+ *   > - **Term** — one-line definition
+ *   > - **Term** — one-line definition
+ */
+
+.callout[data-callout="infobox"] {
+  float: right;
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  width: 100%;
+  max-width: 330px;
+  margin: 0 0 1rem 1.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.8em;
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+}
+
+/* NB: body content (incl. h2 sections) is intentionally allowed to flow
+ * alongside the infobox — the wiki look. We do NOT clear h2 past the float.
+ *
+ * Earlier this snippet forced `.callout[data-callout="infobox"] ~ h2
+ * { clear: right }` so each section started cleanly below the infobox. That
+ * traded one cosmetic issue for a worse one: when the infobox is tall and the
+ * intro above it is short, every following section is pushed down past the
+ * full infobox height, leaving a large empty gap in the left column. Letting
+ * content wrap fills that space; the only cost is that a line may widen to full
+ * width where the infobox ends mid-section, which reads as normal wiki/print
+ * flow. The section-end clearfix below still contains the float to its page. */
+
+/* "INFOBOX" header — small, muted, uppercase. Functional label only. */
+.callout[data-callout="infobox"] > .callout-title {
+  font-size: 0.70em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.55;
+  padding: 0 0 0.4rem;
+  margin-bottom: 0.4rem;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.callout[data-callout="infobox"] > .callout-title .callout-icon {
+  display: none;
+}
+
+/* Section labels inside (## Key claims, ## Key terms, etc.) */
+.callout[data-callout="infobox"] .callout-content :is(h2, h3, h4) {
+  font-size: 0.92em;
+  font-weight: 700;
+  margin: 0.8rem 0 0.25rem;
+  padding-bottom: 0.15rem;
+  border-bottom: 1px solid var(--background-modifier-border);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.callout[data-callout="infobox"] .callout-content :is(h2, h3, h4):first-child {
+  margin-top: 0;
+}
+
+/* Lists tighter than default */
+.callout[data-callout="infobox"] .callout-content :is(ul, ol) {
+  margin: 0.25rem 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.callout[data-callout="infobox"] .callout-content li {
+  margin: 0.5rem 0;
+  line-height: 1.45;
+  padding-left: 0.7rem;
+  border-left: 2px solid var(--background-modifier-border);
+}
+
+/* Bold = field label (for Type/Speaker/Date lines and for Key term entries).
+   First-bold-in-list-item is the Key-term header — accent-colored so the
+   term pops visually from the definition that follows. */
+.callout[data-callout="infobox"] .callout-content strong {
+  font-weight: 600;
+  color: var(--text-normal);
+}
+
+.callout[data-callout="infobox"] .callout-content li > strong:first-child {
+  display: inline-block;
+  color: var(--text-accent);
+  font-weight: 700;
+  background-color: rgba(125, 200, 215, 0.22);
+  padding: 1px 7px;
+  border-radius: 4px;
+  margin-right: 3px;
+  line-height: 1.5;
+}
+
+/* Em-dash after the term gets a touch more breathing room */
+.callout[data-callout="infobox"] .callout-content li > strong:first-child + * {
+  margin-left: 0.15rem;
+}
+
+/* Optional image (entity portrait, product photo) sized to the card width */
+.callout[data-callout="infobox"] .callout-content img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+/* Paragraph spacing inside the infobox */
+.callout[data-callout="infobox"] .callout-content p {
+  margin: 0.25rem 0;
+  line-height: 1.4;
+}
+
+/* On narrow panes, drop the float and let the infobox stack above the body */
+@container (max-width: 640px) {
+  .callout[data-callout="infobox"] {
+    float: none;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* Same stacked behavior in contexts that don't declare a container:
+ *   - hover popovers (link-preview cards) — too narrow to float anything
+ *   - markdown embeds (transclusions inside another page)
+ *   - any preview view narrower than ~720px (catches narrow side panes) */
+.hover-popover .callout[data-callout="infobox"],
+.markdown-embed .callout[data-callout="infobox"],
+.popover .callout[data-callout="infobox"] {
+  float: none;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media (max-width: 720px) {
+  .callout[data-callout="infobox"] {
+    float: none;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* In edit / live preview mode, drop the float (float + CodeMirror doesn't render cleanly) */
+.markdown-source-view .callout[data-callout="infobox"] {
+  float: none;
+  max-width: none;
+}
+
+/* Clearfix on common parent so floated infobox doesn't escape page sections */
+.markdown-preview-view .markdown-preview-section::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* When a page carries an infobox, widen the readable line a touch so the
+ * body column isn't crushed by the 330px right-rail. Targets only infobox
+ * pages — non-infobox pages keep the default Obsidian/Minimal width. */
+.markdown-preview-view:has(.callout[data-callout="infobox"]),
+.markdown-source-view:has(.callout[data-callout="infobox"]) {
+  --file-line-width: 52em;
+}

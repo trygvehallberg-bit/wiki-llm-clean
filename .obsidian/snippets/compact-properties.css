@@ -1,0 +1,103 @@
+/* compact-properties.css
+ *
+ * Makes Obsidian's visible Properties block take less vertical space without
+ * changing frontmatter/YAML. Applies in reading view and live preview.
+ *
+ * To disable: Settings -> Appearance -> CSS snippets -> toggle
+ * `compact-properties`.
+ */
+
+.metadata-container {
+  --metadata-property-radius: 4px;
+  --metadata-property-padding: 0 4px;
+  --metadata-label-width: minmax(7.5rem, 28%);
+  margin-block: 0.2rem 0.45rem !important;
+  padding-block: 0 !important;
+  font-size: 0.78em;
+  line-height: 1.2;
+}
+
+.metadata-container .metadata-properties-heading {
+  min-height: 1.15rem !important;
+  margin-bottom: 0 !important;
+  font-size: 0.78em;
+  line-height: 1.15 !important;
+  opacity: 0.65;
+}
+
+.metadata-container .metadata-properties-title {
+  font-size: 1em;
+  line-height: 1.2;
+}
+
+.metadata-container .metadata-property {
+  min-height: 1.2rem !important;
+  margin-block: 0 !important;
+  padding-block: 0 !important;
+  gap: 0.25rem !important;
+}
+
+.metadata-container .metadata-property-key,
+.metadata-container .metadata-property-value {
+  min-height: 1.2rem !important;
+  padding-block: 0 !important;
+  line-height: 1.2 !important;
+}
+
+.metadata-container .metadata-property-key {
+  color: var(--text-muted);
+  align-items: center !important;
+}
+
+.metadata-container .metadata-property-icon {
+  --icon-size: 0.78rem;
+  margin-inline-end: 0.2rem !important;
+}
+
+.metadata-container input,
+.metadata-container textarea,
+.metadata-container .metadata-input-text,
+.metadata-container .metadata-property-value {
+  font-size: 1em;
+  line-height: 1.2 !important;
+}
+
+.metadata-container .multi-select-container,
+.metadata-container .metadata-link-inner,
+.metadata-container .metadata-input-longtext {
+  min-height: 1.1rem !important;
+  line-height: 1.2 !important;
+}
+
+.metadata-container .multi-select-pill,
+.metadata-container .metadata-link-inner {
+  min-height: 1rem !important;
+  padding-block: 0 !important;
+  line-height: 1.2 !important;
+}
+
+.metadata-container .metadata-add-button {
+  min-height: 1.15rem !important;
+  margin-top: 0 !important;
+  font-size: 0.9em;
+  opacity: 0.35;
+}
+
+.metadata-container:hover .metadata-add-button,
+.metadata-container:focus-within .metadata-add-button {
+  opacity: 1;
+}
+
+/* On wiki pages with an infobox, hide Properties in reading view. CSS cannot
+ * reliably move Obsidian's Properties block below the article body because it
+ * is rendered outside the markdown flow, so hiding it is the stable option.
+ * Live preview/edit mode still shows compact Properties for maintenance. */
+.markdown-preview-view:has(.callout[data-callout="infobox"]) .metadata-container {
+  display: none !important;
+}
+
+/* Keep the home dashboard's intentional hidden-properties behavior. */
+.markdown-preview-view.card-grid .metadata-container,
+.markdown-source-view.card-grid .metadata-container {
+  display: none !important;
+}

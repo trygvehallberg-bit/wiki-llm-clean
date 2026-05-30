@@ -1,0 +1,28 @@
+/* VaultOS — folder color coding
+ *
+ * Tints folder names in the file explorer so wiki kinds, raw archive,
+ * inbox, and meta are visually distinguishable at a glance.
+ *
+ * Palette matches the graph view color groups in .obsidian/graph.json:
+ *   Entities   blue    #5B8DEF
+ *   Concepts   green   #57C68E
+ *   Sources    orange  #E8943B
+ *   Syntheses  purple  #A371DA
+ *   Inbox      yellow  #E8C547
+ *   Raw        gray    #999999
+ *   Meta       light   #BBBBBB
+ *
+ * Enable in Settings → Appearance → CSS snippets.
+ */
+
+/* Wiki folders */
+.nav-folder-title[data-path^="wiki/entities"]   .nav-folder-title-content { color: #5B8DEF; font-weight: 500; }
+.nav-folder-title[data-path^="wiki/concepts"]   .nav-folder-title-content { color: #57C68E; font-weight: 500; }
+.nav-folder-title[data-path^="wiki/sources"]    .nav-folder-title-content { color: #E8943B; font-weight: 500; }
+.nav-folder-title[data-path^="wiki/syntheses"]  .nav-folder-title-content { color: #A371DA; font-weight: 500; }
+
+/* Top-level workflow folders */
+.nav-folder-title[data-path="inbox"]            .nav-folder-title-content { color: #E8C547; font-weight: 500; }
+.nav-folder-title[data-path="raw"]              .nav-folder-title-content { color: #999999; }
+.nav-folder-title[data-path^="raw/"]            .nav-folder-title-content { color: #999999; }
+.nav-folder-title[data-path="meta"]             .nav-folder-title-content { color: #BBBBBB; }

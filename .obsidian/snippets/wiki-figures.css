@@ -1,0 +1,64 @@
+/* wiki-figures.css
+ *
+ * Wikipedia-style placement for inline image attachments embedded in note
+ * bodies — `![[Pasted image ...]]` and other `![[file]]` image embeds.
+ * Instead of taking the full content width (Obsidian's default), they float
+ * to the right as a framed thumbnail and the body text wraps around them.
+ *
+ * Scope notes:
+ *  - Targets `.internal-embed.image-embed` — i.e. Obsidian `![[ ]]` embeds.
+ *    Inline `<img>` cover thumbnails in tables (entity filmography/biblio-
+ *    grafi) and external `![](url)` covers are NOT internal-embeds, so they
+ *    are untouched.
+ *  - Infobox images are owned by `infobox.css`
+ *    (`.callout[data-callout="infobox"] .callout-content img`); they live
+ *    inside `.callout`, and `:not(.callout *)` below excludes them.
+ *  - Reading view only (the vault reads in preview; livePreview is off).
+ *
+ * Tweak the thumbnail size via --wiki-fig-width below.
+ * Enable: Settings → Appearance → CSS snippets → toggle `wiki-figures`.
+ */
+
+.markdown-preview-view {
+  --wiki-fig-width: 300px;
+}
+
+/* Float body image embeds right, framed; skip anything inside a callout */
+.markdown-preview-view .internal-embed.image-embed:not(.callout *) {
+  float: right;
+  clear: right;
+  width: auto;
+  max-width: min(var(--wiki-fig-width), 45%);
+  margin: 0.15rem 0 0.7rem 1.4rem;
+}
+
+.markdown-preview-view .internal-embed.image-embed:not(.callout *) img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.12);
+}
+
+/* NB: we intentionally do NOT clear h2 past floats. Letting headings and body
+ * flow alongside a floated figure/infobox is the wiki look and avoids the big
+ * empty gap a `clear` leaves when the float is tall and the text above is short. */
+
+/* Narrow panes: drop the float, center the figure, allow full width */
+@media (max-width: 720px) {
+  .markdown-preview-view .internal-embed.image-embed:not(.callout *) {
+    float: none;
+    max-width: 100%;
+    margin: 0.6rem auto 1rem;
+  }
+}
+
+/* Hover previews and transclusion embeds are too narrow to float into */
+.hover-popover .internal-embed.image-embed,
+.markdown-embed .internal-embed.image-embed,
+.popover .internal-embed.image-embed {
+  float: none;
+  max-width: 100%;
+  margin: 0.6rem auto;
+}

@@ -1,0 +1,29 @@
+# --- VaultOS template .gitignore ---
+# Standard: git tracks only what Obsidian Sync does not carry. Obsidian config is
+# Sync-owned — EXCEPT the CSS snippets, which the wiki rendering (infobox /
+# home-grid / figures) depends on. A fresh clone has no shared Sync, so the
+# snippets must travel with the template.
+.obsidian/*
+!.obsidian/snippets/
+
+# Web Clipper drop zone — raw clips stay local until triage routes them into raw/
+inbox/Clippings/
+Inbox/Clippings/
+
+# Bulky binary / raw exports stay local-cold unless deliberately promoted
+raw/**/*.pdf
+raw/**/*.zip
+raw/**/*.png
+raw/**/*.jpg
+raw/**/*.jpeg
+raw/**/*.json
+raw/**/*.csv
+
+# Machine-local Claude Code settings
+.claude/settings.local.json
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*~
+*.swp
