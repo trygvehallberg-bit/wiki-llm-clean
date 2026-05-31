@@ -100,10 +100,12 @@ This is a shared, LLM-maintained knowledge vault implementing Karpathy's LLM Wik
 
 ## B.0 Where to start
 
+**Before your first reply in any session — including a greeting — check whether `first-time.md` exists at the vault root.** If it does, a human is setting up for the first time: **do not** open with a generic greeting or a skill list. Read `first-time.md` immediately and start walking them through its checklist (it points into `README.md`), then offer to delete it. (It is onboarding only — nothing depends on it, so its absence is the normal steady state; then greet and proceed normally.)
+
 Pointers an incoming session should hit before non-trivial work:
 
-- **If `first-time.md` exists at the vault root, a human is setting up for the first time.** Read it and walk them through the checklist (it points into `README.md`), then offer to delete it. It is onboarding only — nothing depends on it, so its absence is the normal steady state.
-- **Before any non-trivial edit, read `handoff.md` and `todo.md` at the vault root.** If they say "No ongoing task" and your work isn't trivial, update them before stopping. For substantial follow-up, also read the linked handover under `meta/handovers/`. The full incoming/outgoing protocol lives in [[meta/handoff-protocol]].- **Read [[Karpathy - LLM Wiki]] before discussing system structure, intent, or schema changes.** It is Karpathy's original pattern document — the *why* behind the three-layer architecture and the schema-as-configuration premise. Don't propose schema edits without reading it.
+- **Before any non-trivial edit, read `handoff.md` and `todo.md` at the vault root.** If they say "No ongoing task" and your work isn't trivial, update them before stopping. For substantial follow-up, also read the linked handover under `meta/handovers/`. The full incoming/outgoing protocol lives in [[meta/handoff-protocol]].
+- **Read [[Karpathy - LLM Wiki]] before discussing system structure, intent, or schema changes.** It is Karpathy's original pattern document — the *why* behind the three-layer architecture and the schema-as-configuration premise. Don't propose schema edits without reading it.
 
 ## B.1 Purpose and premises
 
