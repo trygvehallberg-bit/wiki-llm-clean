@@ -8,6 +8,9 @@ Built on Andrej Karpathy's [LLM Wiki pattern](meta/LLM%20Wiki%20-%20Karpathy.md)
 
 **Fastest path:** open the vault in Claude Code (or Codex / Cowork) and say hello — it runs the `first-time.md` wizard and walks you through everything below interactively, then tailors the vault to you. Prefer to do it by hand? The steps:
 
+> [!important] Open the **vault folder itself** as the working directory
+> When you start Claude Code (or Codex / Cowork), make the working directory **this folder**, not its parent. The schema (`CLAUDE.md`) auto-loads only when the vault folder is the working directory — open one level too high and the agent runs generic, without VaultOS at all, and it fails silently (no error, because it never saw a schema to miss). If the agent never mentions the wizard or the VaultOS conventions, this is almost always why — `cd` into the vault folder and retry.
+
 1. **Open the folder as an Obsidian vault.** File → Open vault → select this folder.
 2. **Trust the vault** when prompted (community plugins won't load otherwise).
 3. **Install the community plugins.** Settings → Community plugins → Browse, then search and install each.

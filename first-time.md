@@ -4,6 +4,9 @@
 
 > Minimal path: a human who wants nothing fancy can skip the wizard, drop a file in `inbox/`, and say `ingest`. But the wizard takes ~5 minutes and tailors the vault to them.
 
+> [!note] For the human, if you opened this file yourself
+> If your agent never mentioned this file or the VaultOS schema and you're reading it by hand to find out why — its working directory is almost certainly the **parent** folder, not the vault folder. `CLAUDE.md` only auto-loads when the vault folder *is* the working directory. `cd` into this folder and start the agent again.
+
 ## Phase 0 — Start the tracked task
 
 - Write the phases below into `todo.md` as a checklist.
