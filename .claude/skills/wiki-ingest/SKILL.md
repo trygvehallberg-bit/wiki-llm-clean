@@ -124,7 +124,7 @@ Triggered by `re-ingest the concept <name>`.
 1. List every source linked from the concept page.
 2. Re-read all of them fresh.
 3. Rewrite the concept page from scratch.
-4. Save the diff against the prior version to `wiki/syntheses/Reingest - <topic> - YYYY-MM-DD.md` (natural form per B.3).
+4. Save the diff against the prior version to `wiki/syntheses/rapporter/Reingest - <topic> - YYYY-MM-DD.md` (natural form per B.3).
 5. Log:
    ```
    ## [YYYY-MM-DD] reingest | concept <name>

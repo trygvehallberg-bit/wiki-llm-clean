@@ -167,7 +167,7 @@ Pointers an incoming session should hit before non-trivial work:
 
 Noen sider er skrevet for menneskelig lesning: `wiki/{entities,concepts,sources}/**`, substantielle synteser, `wiki/{home,overview,index}.md`. §B.3 Naturlig-norsk-mønstre, infobox-disiplin og first-line stranger-test gjelder her.
 
-Andre sider er agent-først arbeidsartefakter: `handoff.md`, `todo.md`, `meta/handovers/**`, `wiki/log.md`, og daterte outputs som `wiki/syntheses/Triage - YYYY-MM-DD.md`, `wiki/syntheses/Lint - YYYY-MM-DD.md` og `wiki/syntheses/Reingest - <topic> - YYYY-MM-DD.md`. Telegrafisk format, checkbox-tabeller og filsti-enumerering er funksjonelt riktig her — naturlig-norsk-lint, infobox-regel og stranger-test gjelder ikke. Lint og ingest leser denne aksen heller enn å enumerere unntak.
+Andre sider er agent-først arbeidsartefakter: `handoff.md`, `todo.md`, `meta/handovers/**`, `wiki/log.md`, og daterte outputs som `wiki/syntheses/rapporter/Triage - YYYY-MM-DD.md`, `wiki/syntheses/rapporter/Lint - YYYY-MM-DD.md` og `wiki/syntheses/rapporter/Reingest - <topic> - YYYY-MM-DD.md`. Telegrafisk format, checkbox-tabeller og filsti-enumerering er funksjonelt riktig her — naturlig-norsk-lint, infobox-regel og stranger-test gjelder ikke. Lint og ingest leser denne aksen heller enn å enumerere unntak.
 
 **Plugin-sync roots:**
 
@@ -216,7 +216,7 @@ Two naming conventions, by kind:
   - Syntheses: descriptive title in sentence case (e.g., `Attention vs Mamba comparison.md`). Date-stamped exception: `Lint - YYYY-MM-DD.md`, `Reingest - <topic> - YYYY-MM-DD.md`.
 - **Sources need a distinguishing element** — speaker/author prefix for talks, title for papers — because a source about "Analytical engines" would otherwise collide with the concept page of the same name. Sources are documents about a topic, not the topic itself.
 - **Slugs survive in two places only**: `raw/<type>/<YYYY-MM-DD>_<slug>.md` (machine-organized archive, agent rarely navigates) and tags (labels, not folders).
-- `wiki/syntheses/Lint - YYYY-MM-DD.md` and `wiki/syntheses/Reingest - <topic> - YYYY-MM-DD.md` — date-stamped exception for periodic outputs (natural form, consistent with other syntheses).
+- `wiki/syntheses/rapporter/Lint - YYYY-MM-DD.md` and `wiki/syntheses/rapporter/Reingest - <topic> - YYYY-MM-DD.md` — date-stamped exception for periodic outputs (natural form, consistent with other syntheses).
 - `raw/<type>/<YYYY-MM-DD>_<slug>.md` — date-prefixed canonical form. ISO 8601 hyphens in the date, underscore between date and slug, underscores within the slug. This is the **output** of triage, not the input. Humans drop files into `inbox/` with any name; the agent generates this canonical path during the triage phase of `/wiki-ingest`. Raw filenames always use slug form regardless of source kind.
 - `raw/media_logs/<export-name>/` — exception for structured media-log item cards exported from services such as Goodreads or Letterboxd. Preserve the import filenames inside the export folder unless there is a specific dedup/encoding problem; the folder, not each item file, is the canonical raw source unit. Prefer aggregate source/synthesis pages over one wiki page per item.
 - **Reserved Vault DNA names.** Wiki entity, source and concept filenames must not match (case-insensitively) the agent-instruction filenames that AI tooling auto-loads as project context — the vault's "DNA". When a natural page name would collide (e.g., the AI product family Claude), use parenthetical disambiguation (`Claude (Anthropic).md`) and add the natural form to the page's `aliases:` frontmatter so `[[Claude]]`-wikilinks still resolve. The current reserved-name list is a parameter — see `meta/vault-config.md` (maintain it there; extend when new auto-load conventions emerge).
@@ -344,7 +344,7 @@ Imported media logs can contain both consumed works (`read`, `watched`) and unco
 Four live operation skills. **CLAUDE.md is the schema authority on conventions; the skills are the procedure authority.** Skills reference back here; they never restate policy. If they ever drift, lint catches it (Check 9 in `/wiki-lint`).
 
 - **`/wiki-ingest`** — Ingest a source into the wiki. Absorbs the whole source lifecycle: triage (when the source is in `inbox/`), fresh ingest, and diff-and-reconcile re-ingest (when a `wiki/sources/` page already exists for the source). See `.claude/skills/wiki-ingest/SKILL.md`.
-- **`/wiki-lint`** — Periodic vault health check. Output is a date-stamped triage checklist at `wiki/syntheses/Lint - YYYY-MM-DD.md`. Never silently fixes anything. See `.claude/skills/wiki-lint/SKILL.md`.
+- **`/wiki-lint`** — Periodic vault health check. Output is a date-stamped triage checklist at `wiki/syntheses/rapporter/Lint - YYYY-MM-DD.md`. Never silently fixes anything. See `.claude/skills/wiki-lint/SKILL.md`.
 - **`/wiki-query`** — Answer a question against the wiki. Reads the index first, drills via wikilinks, answers with cited claims, and may surface synthesis directions without filing them unless explicitly asked. See `.claude/skills/wiki-query/SKILL.md`.
 - **`/wiki-synthesis`** — Generate synthesis ideas or run an explicit vault-backed synthesis workflow. Default mode is idea generation, not a vault scan. See `.claude/skills/wiki-synthesis/SKILL.md`.
 

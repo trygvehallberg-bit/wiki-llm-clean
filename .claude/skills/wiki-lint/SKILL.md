@@ -1,6 +1,6 @@
 ---
 name: wiki-lint
-description: Periodic health check of this vault. Triggers on "run lint", "lint the vault", "lint pass", or any general request to audit the vault for orphans, contradictions, stale claims, missing cross-references, synthesis readiness, hub-concept gaps, tag gaps, re-ingest candidates, source gaps, or schema-vs-skills drift. Output is a date-stamped triage checklist at `wiki/syntheses/Lint - YYYY-MM-DD.md`. Lint never silently fixes anything — it proposes work for the human or for a follow-up ingest/query session. Do NOT invoke for single-source ingest or for question-answering.
+description: Periodic health check of this vault. Triggers on "run lint", "lint the vault", "lint pass", or any general request to audit the vault for orphans, contradictions, stale claims, missing cross-references, synthesis readiness, hub-concept gaps, tag gaps, re-ingest candidates, source gaps, or schema-vs-skills drift. Output is a date-stamped triage checklist at `wiki/syntheses/rapporter/Lint - YYYY-MM-DD.md`. Lint never silently fixes anything — it proposes work for the human or for a follow-up ingest/query session. Do NOT invoke for single-source ingest or for question-answering.
 ---
 
 # /wiki-lint
@@ -23,7 +23,7 @@ A full lint reads index, log, tags, every source page, and samples many entity/c
 
 **Full write set** (declared up front so the operator knows what gets touched):
 
-1. **New file:** `wiki/syntheses/Lint - YYYY-MM-DD.md` — the report itself (Phase 3).
+1. **New file:** `wiki/syntheses/rapporter/Lint - YYYY-MM-DD.md` — the report itself (Phase 3).
 2. **Append:** `wiki/log.md` — one log entry (Phase 4).
 3. **Single-line edit:** `wiki/index.md` — add the new report under `## Syntheses` (Phase 5).
 4. **Single-line edit:** `CLAUDE.md` §B.0 — update the "Latest lint" wikilink pointer (Phase 6).
@@ -171,7 +171,7 @@ If a listed page does not exist, skip silently. If a listed page exists but has 
 
 ## Phase 3 — Write the report
 
-Path: `wiki/syntheses/Lint - YYYY-MM-DD.md` (natural form per CLAUDE.md B.3).
+Path: `wiki/syntheses/rapporter/Lint - YYYY-MM-DD.md` (natural form per CLAUDE.md B.3).
 
 Frontmatter (lint reports typically have no external `sources:` — they synthesize the vault itself — so the empty inline `[]` form is correct here; any non-empty `sources:` or `source_path:` list must be block-style per CLAUDE.md B.3):
 
