@@ -33,7 +33,7 @@ Copied unchanged — these are pure portable VaultOS.
 - `meta/handoff-protocol.md`
 - `meta/synthesis-generation-recipe.md`
 - `meta/LLM Wiki - Karpathy.md`        ← Karpathy pattern doc (foundation/context)
-- `meta/vaultos-lang-no.md`            ← Norwegian language pack = worked example; wizard generates `vaultos-lang-<xx>.md` for other languages from this pattern
+- `meta/vaultos-lang-no.md`            ← Norwegian language pack = worked example (section names, infobox labels, the seven naturlig-norsk anti-patterns, and the four-bucket writing & structure standard); wizard generates `vaultos-lang-<xx>.md` for other languages from this pattern
 - `meta/vaultos-manifest.md`           ← this file (so recipients can understand/regenerate the boundary)
 - `.obsidian/snippets/`                ← rendering DNA (infobox/home-grid/figures); recipients have no shared Obsidian Sync, so the template MUST carry these
 
@@ -106,7 +106,7 @@ The **template repo itself** governs whether people may use VaultOS; the **recip
 
 Once an upstream VaultOS repo exists, established vaults receive patches through an **agent-mediated, user-curated `update` operation** — never a blind `git pull` / sync. Every file carries an update policy:
 
-- **`core`** (refreshed by updates): `CLAUDE.md`, `.claude/skills/**`, `meta/handoff-protocol.md`, `meta/synthesis-generation-recipe.md`, `meta/LLM Wiki - Karpathy.md`, `meta/vaultos-manifest.md`, `.obsidian/snippets/`. The portable system that improves over time.
+- **`core`** (refreshed by updates): `CLAUDE.md`, `.claude/skills/**`, `meta/handoff-protocol.md`, `meta/synthesis-generation-recipe.md`, `meta/LLM Wiki - Karpathy.md`, `meta/vaultos-manifest.md`, `.obsidian/snippets/`. The portable system that improves over time. The four-bucket writing & structure standard's *skeleton* (CLAUDE.md §B.3) is core/portable; its populated Norwegian fill lives in the language pack as a worked example, regenerated per language by the wizard.
 - **`seed`** (template-only — **never pulled** into an established vault, which already has its own real versions): `first-time.md`, the `wiki/{home,index,overview,tags,log}.md` stubs, the `handoff.md` / `todo.md` stubs, `.claude/settings.json`, `meta/vault-config.md`, `meta/backlog.md`, `.gitignore`, the `.gitkeep`s, and the Karpathy seed pages.
 - **`instance`** (never in the template, never pulled): `wiki/**` content, `raw/**`, `personal/**`, and the *values* in `vault-config.md` / the chosen language pack.
 

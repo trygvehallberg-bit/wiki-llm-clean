@@ -32,3 +32,6 @@ Agent-instruction filenames AI tooling auto-loads as project context. Wiki entit
 
 ## Model-id baseline (lint Check 6 model-parity)
 The agent stamps its own model-id in page frontmatter and records the baseline here on first ingest. Lint flags pages on an older id as re-ingest candidates. Update when the default model advances.
+
+## Ingest-recommended tier (model floor at ingest time)
+Ingest prose quality is model-dependent. The top tier gives the best results; the workhorse tier one notch down is fully usable with slightly less polish; the smallest/cheapest tier can collapse prose quality (cross-language intrusion, grammatical errors — most visible in non-English wiki languages). Set this per vault: name the tiers you trust and the one to avoid, ideally backed by a quick blind benchmark on your own language and sources. Reasoning effort above "high" is typically wasted spend. Drives the `wiki-ingest` opening note (§B.4.0) — which warns **only** at the avoid-tier, never on a workhorse-or-better model — and the batch plan-gate model confirmation.

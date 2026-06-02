@@ -100,19 +100,21 @@ For each finding, propose the fix in the lint report. Schema-layer fixes are usu
 
 ### Check 10 — Newcomer readability
 
-Two sub-checks; both flag-only, never auto-fix.
+Diagnoses pages against the full four-bucket writing & structure standard (`meta/vaultos-lang-no.md`, "Skrive- og strukturstandard"), not just the prose anti-patterns. All sub-checks are flag-only, never auto-fix.
 
 **(a) First-line stranger test.** For each source/entity/concept page, read the first line. Would a curious newcomer who hasn't read the source and doesn't know the speaker understand what the page is about? If the first line leans on inside-jargon, name-drops, or assumes prior reading ("Karpathy/Sequoia: deep argument..."), flag for rewrite. See CLAUDE.md B.3 stranger-test rule. Propose a rewrite in the report — short, substance-first, attribution-after.
 
 **(b) Missing `[!infobox]` on jargon-heavy pages.** Source / entity / concept pages without an `[!infobox]` callout get flagged if the body uses specialized vocabulary a newcomer wouldn't know. Trivially short pages (one-paragraph entities, no jargon) are not flagged. The infobox should carry kind-specific content (see CLAUDE.md B.3 "Infobox sidebar") with 3-5 key-term definitions inline. Propose the page in the report with a brief sketch of what the infobox should contain.
 
-**(c) Norwegian prose quality.** Spot-check 5–10 random source/entity/concept pages for the six patterns documented in CLAUDE.md B.3 "Naturlig norsk": (1) wrong prepositions for languages ("skrev i" → "skrev på"), (2) stranded English-pattern prepositions, (3) Latinate -or/-asjon nominalizations where a verb form would be natural, (4) telegram-bullets without verbs, (5) AI-rhetorical contrastive negation and signal phrases, (6) unmarked anglicisms ("Status: live", "outgrows itself"). Flag specific lines in the report with proposed rewrites — flag-only, never auto-fix. Skip agent-first pages per CLAUDE.md §B.2 audience-axis (telegrafisk format er funksjonelt riktig der).
+**(c) Norwegian prose quality.** Spot-check 5–10 random source/entity/concept pages for the seven patterns documented in `meta/vaultos-lang-no.md` "Naturlig norsk": (1) wrong prepositions for languages ("skrev i" → "skrev på"), (2) stranded English-pattern prepositions, (3) Latinate -or/-asjon nominalizations where a verb form would be natural, (4) telegram-bullets without verbs, (5) AI-rhetorical contrastive negation and signal phrases, (6) unmarked anglicisms ("Status: live", "outgrows itself"), (7) efficient-but-amputated sentences (thin copula stumps like "Kravene er sju." where the reader needs a sentence that leads them into the material). Flag specific lines in the report with proposed rewrites — flag-only, never auto-fix. Skip agent-first pages per CLAUDE.md §B.2 audience-axis (telegrafisk format er funksjonelt riktig der).
 
 **(d) Systematic anglicism scan.** Where (c) spot-checks 5–10 pages, (d) is a full-vault regex sweep for the most detectable anglicism markers from B.3 mønster 6. Patterns:
 - English `-s`/`-es` verb forms in Norwegian context: `\b(refreshes|outgrows|fails|triggers|files|runs|works)\b` followed by Norwegian preposition/adverb
 - Recurring anglicism phrases: `Status: live`, `fails silently`, `audit trail`, `vanity-dashboard`, `judgment-heavy`, `spot-check`, `outgrows itself`
 
 Run as one pass on `wiki/sources/`, `wiki/entities/`, `wiki/concepts/`, `wiki/syntheses/` bodies (skip infoboxes since their telegram form is intentional; skip agent-first pages per CLAUDE.md §B.2 audience-axis). Flag-only; never auto-fix.
+
+**(e) Structure & content (the rest of the four-bucket standard).** Spot-check the same pages against buckets 1 (struktur), 2 (klarhet beyond the first line), and 4 (innhold) of the writing standard (`meta/vaultos-lang-no.md`): does the first sentence define the headword and the opening paragraph work as an ingress? rising difficulty (simple/important first, complex last)? one page, one topic (flag topic-fusion as a split candidate)? right length, not maximal? jargon defined once and never explained with other jargon? contested claims attributed, no implicit value judgments? durable phrasing (no "nylig"/datestamping, concrete years)? Flag specific pages with the bucket and the gap — flag-only, never auto-fix. Skip agent-first pages per CLAUDE.md §B.2 audience-axis.
 
 When the volume of flags is large (e.g., during the 2026-05 retroactive cleanup pass), group findings by page kind (sources first, then concepts, then entities) and by severity — concept pages probably go first overall since their definitions propagate into many source pages.
 

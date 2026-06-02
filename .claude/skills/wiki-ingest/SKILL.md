@@ -20,6 +20,8 @@ If multiple inbox files are involved, **process one at a time** (per the user's 
 
 ## Phase 0 — Plan-before-run gate and exclusion gate
 
+**Model-awareness at start-up (per CLAUDE.md B.4.0).** State the model this ingest is running on in your opening line. Stay silent on any workhorse-or-better model — most current tiers do the job; do not nag. Add a one-line note only if the model is at the weakest tier that collapses prose quality for this wiki's language (the avoid-tier in `meta/vault-config.md`) — e.g. *"kjører på <modell>, som er under prosa-baren for ingest — vurder en sterkere modell eller re-ingest senere."* Awareness, not a gate: do not block. For batch / multi-source ingest, confirm model + effort inside the plan-before-run paragraph below instead of noting per source.
+
 **Plan-before-run.** Per CLAUDE.md B.4.0: if this invocation will touch more than ~15 wiki pages, or will run ingest/re-ingest on more than one source, present a one-paragraph plan first (scope, expected touches, risks) and wait for go. Single-source ingest of a normal transcript (one source page + ~10 entity/concept touches) does not need a plan.
 
 **Large operations split work across model sizes.** For multi-page mechanical work (frontmatter sweeps, infobox retrofits, mass renames) propose the slice split in the plan: Opus for judgment-heavy slices (substantive bios, syntheses, schema), Sonnet via Agent for templated mechanical slices, Bash for purely scripted edits. Surface this at plan time — don't default everything to Opus.
@@ -69,6 +71,7 @@ Check whether `wiki/sources/<derived-filename>.md` already exists. Two paths:
 1. **Read the source completely** before writing anything. Don't skim.
 1a. **Read `wiki/tags.md`** so the current tag universe is fresh. You'll use it both for tagging the new source and for spotting sub-tag candidates in step 7a.
 2. **Create `wiki/sources/<source-page-name>.md`** per CLAUDE.md B.3:
+   - **Write to the four-bucket writing standard** — short checklist (full standard in `meta/vaultos-lang-no.md`, "Skrive- og strukturstandard"): **Struktur** — definer i første setning · viktigst først · én side, ett tema · lenk inline. **Klarhet** — stranger-test · definer fagord én gang. **Prosa** — aktivt, hele setninger · ingen anti-mønstre. **Innhold** — attribuer · ingen datostempling · sitater peker til kilder, ikke raw.
    - Frontmatter shape (kind, title, dates, ingest_model, source_path as a list, tags) — see B.3.
    - **First line: one-sentence summary that passes the stranger test** (B.3). Lead with what the source argues / covers; attribution after. If a reader has to know the speaker to parse the sentence, rewrite it.
    - **`[!infobox]` callout at the top** per B.3 — default-on for source pages. Content: Type / Speaker (or Author) / Date+venue / `## Nøkkelbegreper` with 3-5 short definitions of vocabulary the body uses. **Do not duplicate Key claims into the infobox** — those live in the body's `## Nøkkelpåstander` section; the infobox is at-a-glance orientation, not a tl;dr. Skip only if the page is trivially short with no specialized vocabulary.
