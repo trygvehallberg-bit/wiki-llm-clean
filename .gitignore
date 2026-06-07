@@ -22,6 +22,10 @@ raw/**/*.csv
 # Machine-local Claude Code settings
 .claude/settings.local.json
 
+# Non-Claude agent skill mirror — generated per-vault from .claude/skills by the
+# mirror hook; the template ships AGENTS.md (the pointer), not a static mirror.
+.agents/
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db
