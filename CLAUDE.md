@@ -173,7 +173,9 @@ Andre sider er agent-først arbeidsartefakter: `handoff.md`, `todo.md`, `meta/ha
 
 Some `raw/` subfolders are synced live by Obsidian plugins and differ from triage-canonical paths: folder casing and internal layout follow the plugin (not the lowercase-slug convention in B.3), triage is skipped (`/wiki-ingest` Phase 1 already short-circuits anything under `raw/`), and plugin-owned support files are overhead, not sources (lint must not flag them; ingest must not process them). Some plugins also expose cover/logo URLs in episode frontmatter that are valid inline image sources for wiki pages (reference `![Cover](url)`; do not mirror into `raw/assets/`).
 
-The specific plugin-sync roots, their overhead-file names, and their cover-URL conventions for this vault are parameters — see `meta/vault-config.md`.
+A plugin-sync root that accretes content across sessions (a plugin keeps adding highlights while the user works through a source) also needs an **ingest-readiness gate**, so a still-growing item is not ingested half-finished. Ingest gates on a settling window over the plugin's last-updated field, plus a worthiness pass that drops low-engagement or off-domain items rather than auto-ingesting the whole root (procedure: `/wiki-ingest` Phase 0). An in-file marker would not survive the next plugin export (the plugin regenerates the file), so the durable readiness signal is a field the plugin itself writes.
+
+The specific plugin-sync roots, their overhead-file names, their cover-URL conventions, and the ingest-gating field and thresholds for this vault are parameters — see `meta/vault-config.md`.
 
 ## B.3 Page conventions
 
