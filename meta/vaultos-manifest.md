@@ -26,7 +26,6 @@ Copied unchanged — these are pure portable VaultOS.
 
 - `AGENTS.md`
 - `.gitattributes`
-- `.claude/skills/wiki-ingest/`
 - `.claude/skills/wiki-lint/`
 - `.claude/skills/wiki-query/`
 - `.claude/skills/wiki-synthesis/`
@@ -62,6 +61,9 @@ Copied, then edited per rule. **Edits happen in the staging copy only — never 
   - Fix the dead `meta/plan.md` / `meta/backlog.md` links (those are excluded).
   - Keep: necessary/recommended plugin split, Web Clipper (desktop + iPhone), the four-operation descriptions.
   - Download-link in Quick start stays a placeholder until provided.
+- **`.claude/skills/wiki-ingest/SKILL.md`**
+  - Phase 0 "plugin-sync candidate gate": keep the *generic* pattern (settling window over a plugin-written last-updated field + worthiness pass); drop any instance plugin name, field name, or threshold (those live in `vault-config`, which is reset).
+  - "Large operations" model split: generic tiers (top-tier / workhorse-tier / Bash), not named models.
 - **`.claude/skills/dikt-analyse-norsk/SKILL.md`**
   - Drop the `[[meta/ideas/SNL API integrasjon]]` wikilink (instance page).
   - Generalise the skeleton tags (`kultur`/`litteratur` → pointer to `wiki/tags.md`).
