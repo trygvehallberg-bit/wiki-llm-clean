@@ -90,7 +90,7 @@ Match the report's tone to the work's actual stakes:
 
 ## A.6 Prose that doesn't read as AI
 
-**Write like a person, not a model. Applies to every piece of natural prose you write (chat, wiki, meta, handovers), in any language.** Telegraphic agent-first artifacts (handoff/todo/log, dated reports) keep their functional formatting; this governs prose meant to be read as prose. Language-specific idiom rules (Norwegian preposition and loanword patterns, and the like) live in the language pack and point back here.
+**Write like a person, not a model. Applies to every piece of natural prose you write (chat, wiki, meta, handovers), in any language.** Telegraphic agent-first artifacts (handoff/todo/log, dated reports) keep their functional formatting; this governs prose meant to be read as prose. Language-specific idiom rules (the wiki language's preposition and loanword patterns, and the like) live in the language pack and point back here.
 
 - **No reflexive contrastive negation.** Patterns like "not X, but Y", "not just X but also Y", "the point isn't X". Use contrast only when it sorts real alternatives or corrects a likely misreading. Otherwise state the claim straight.
 - **No signal phrases.** "It's worth noting", "importantly", "the key thing is", "crucially", "all in all". Cut them and make the point.
@@ -106,10 +106,10 @@ Match the report's tone to the work's actual stakes:
 This is an LLM-maintained knowledge vault implementing Karpathy's LLM Wiki pattern (full source: [[Karpathy - LLM Wiki]]). Deferred items: [[backlog]].
 
 > [!info] Parametric config (Claude Code `@import`)
-> This schema reads parametrically. The per-vault parameters and the Norwegian language/form pack are imported below; Part B sections point into them rather than inlining the values. The pattern (rules) stays here in CLAUDE.md; the parameters (values) live in the imported files. The imports are parameter tables CLAUDE.md routes into, not a competing rulebook.
+> This schema reads parametrically. The per-vault parameters and the active language/form pack are imported below; Part B sections point into them rather than inlining the values. The pattern (rules) stays here in CLAUDE.md; the parameters (values) live in the imported files. The imports are parameter tables CLAUDE.md routes into, not a competing rulebook.
 
 @meta/vault-config.md
-@meta/vaultos-lang-no.md
+@meta/vaultos-lang-en.md
 
 ## B.0 Where to start
 
@@ -127,7 +127,7 @@ Pointers an incoming session should hit before non-trivial work:
 - **Canonical instruction file (CLAUDE.md / AGENTS.md) is a setup parameter; see `meta/vault-config.md` and §B.12.** One file holds the full schema; the other is a thin pointer to it. The choice follows the primary AI tool (Claude Code → `CLAUDE.md`; Codex or other → `AGENTS.md`).
 - **Hands-off ingest.** Whoever triggers ingest does so without per-source steering. This schema must be precise enough that you don't need to guess.
 - **Dynamic.** Old sources get re-ingested as models improve. Wiki pages record which model last touched them.
-- **Norwegian wiki, English meta.** Sources may arrive in any language; wiki content (`wiki/` page bodies, summaries, index entries, log entries, source pages) is written in Norwegian. Operational/meta documentation (`CLAUDE.md`, `AGENTS.md`, `meta/**`, this first-run plan, skills) stays in English unless explicitly requested otherwise. (Language is a per-vault parameter; see `meta/vault-config.md`. The Norwegian form details live in the swappable pack `meta/vaultos-lang-no.md`.)
+- **Wiki language is a setup parameter; English is the shipped default.** Wiki content (`wiki/` page bodies, summaries, index entries, log entries, source pages) is written in the chosen wiki language; sources may arrive in any language and are normalized to it. Operational/meta documentation (`CLAUDE.md`, `AGENTS.md`, `meta/**`, this first-run plan, skills) stays in English unless explicitly requested otherwise. (See `meta/vault-config.md`. The active form details live in the swappable pack `meta/vaultos-lang-en.md`; a Norwegian pack ships alongside as `meta/vaultos-lang-no.md` for vaults that choose Norwegian.)
 
 ## B.2 Layout
 
@@ -148,7 +148,8 @@ Pointers an incoming session should hit before non-trivial work:
 │   ├── plan.md
 │   ├── backlog.md
 │   ├── vault-config.md               ← @imported instance parameters (see top of this file)
-│   ├── vaultos-lang-no.md            ← @imported Norwegian language/form pack
+│   ├── vaultos-lang-en.md            ← @imported language/form pack (English, default)
+│   ├── vaultos-lang-no.md            ← optional Norwegian language/form pack (swap in at setup)
 │   ├── vaultos-manifest.md           ← portable VaultOS manifest (template staging)
 │   ├── synthesis-generation-recipe.md
 │   ├── handoff-protocol.md           ← rules for handoff.md, todo.md, and handovers/
@@ -293,11 +294,11 @@ Tags exist to connect pages that would otherwise stay far apart: across time, ac
 
 ### Body conventions
 
-- **Writing & structure standard (four buckets).** All wiki prose is written to one standard; `/wiki-ingest` drafts to it and `/wiki-editor` scores against it. The four buckets are the portable pattern. The full rules and Norwegian examples live in the always-imported `meta/vaultos-lang-no.md` ("Skrive- og strukturstandard"), with a one-line-per-bucket checklist at each writing step:
-  - **Struktur og disposisjon:** define in the first sentence (ingress = the page in miniature); most-important-first, rising difficulty; one page, one topic (hub when too big); right length, not maximal; descriptive subheadings; link inline + `## Kryssreferanser` at the bottom.
-  - **Klarhet for leseren:** the **stranger test** (first line + `[!infobox]` readable by a newcomer who hasn't read the source or known the speaker; lead with substance, attribution after); define each fagord once (never explain jargon with jargon); jargon must do work or it's cut; don't smuggle the thing you're explaining into the analogy.
-  - **Prosa og setningsnivå:** active voice, full sentences; the language-independent anti-AI-prose patterns in §A.6; plus the Norwegian-specific *naturlig norsk* idiom anti-patterns (definitions + tests in the pack).
-  - **Innhold, kilde og holdbarhet:** attribute contested claims, no implicit value judgments; write to last (no datestamping, concrete years); media-log epistemic layers.
+- **Writing & structure standard (four buckets).** All wiki prose is written to one standard; `/wiki-ingest` drafts to it and `/wiki-editor` scores against it. The four buckets are the portable pattern. The full rules and examples live in the always-imported language pack (`meta/vaultos-lang-en.md`, "Writing & structure standard"), with a one-line-per-bucket checklist at each writing step:
+  - **Structure & organization:** define in the first sentence (lead = the page in miniature); most-important-first, rising difficulty; one page, one topic (hub when too big); right length, not maximal; descriptive subheadings; link inline + `## Cross-references` at the bottom.
+  - **Clarity for the reader:** the **stranger test** (first line + `[!infobox]` readable by a newcomer who hasn't read the source or known the speaker; lead with substance, attribution after); define each term once (never explain jargon with jargon); jargon must do work or it's cut; don't smuggle the thing you're explaining into the analogy.
+  - **Prose & sentence level:** active voice, full sentences; the language-independent anti-AI-prose patterns in §A.6; plus the wiki language's idiom anti-patterns (the "Natural English" section of the pack; definitions + tests there).
+  - **Content, source & durability:** attribute contested claims, no implicit value judgments; write to last (no datestamping, concrete years); media-log epistemic layers.
 - **Cross-references use `[[wikilinks]]`**, never raw paths. Obsidian's graph view depends on it.
 - **Citations** point to `wiki/sources/<slug>` pages, never directly into `raw/`. Source pages are the single point of truth for what a source says.
 - **Callouts** add value when they convey *semantic type*, not just visual variety. Use the following types where the content has that shape, and stop. 2–5 callouts per source page is a healthy ceiling; more turns the page into noise.
@@ -316,11 +317,11 @@ Tags exist to connect pages that would otherwise stay far apart: across time, ac
   - `> [!infobox]`: Wikipedia-style right-rail sidebar with type/role/key claims/key terms. Default-on for source/entity/concept pages; see "Infobox sidebar" sub-section below.
   - `> [!banner]`: full-width header/footer band on `home.md` (sheds the standard callout chrome via CSS). Reserved for that one page; do not use elsewhere.
   - Navigational pages (`index.md`, `log.md`, `overview.md`, `tags.md`) get no callouts; they're not content. **Exception: `home.md`** is the human-facing category-chooser launcher (Homepage-plugin entry point) and intentionally uses `[!banner]` for its header/footer plus one category callout (`[!tip]`, `[!info]`, `[!example]`, `[!success]`, `[!important]`, `[!question]`, `[!abstract]`) per top-level door; same semantic-type-not-just-decoration discipline still applies (each card's callout type carries meaning).
-- **Section headings** on source pages: the canonical Norwegian names live in the always-imported `meta/vaultos-lang-no.md`. Skip sections that don't apply.
+- **Section headings** on source pages: the canonical names live in the always-imported language pack (`meta/vaultos-lang-en.md`). Skip sections that don't apply.
 
 ### Infobox sidebar (default-on)
 
-Source, entity, and concept pages carry an `> [!infobox]` callout at the top, rendered as a right-rail floated sidebar via `.obsidian/snippets/infobox.css`. Goal: a newcomer reading the page should be able to orient themselves from the infobox alone before the body text: type, who/when, top claims, and any specialized vocabulary defined inline. Infobox field labels should be Norwegian on wiki pages; the field *roles* below are the portable pattern, and the Norwegian labels are catalogued in `meta/vaultos-lang-no.md`.
+Source, entity, and concept pages carry an `> [!infobox]` callout at the top, rendered as a right-rail floated sidebar via `.obsidian/snippets/infobox.css`. Goal: a newcomer reading the page should be able to orient themselves from the infobox alone before the body text: type, who/when, top claims, and any specialized vocabulary defined inline. Infobox field labels are in the wiki language on wiki pages; the field *roles* below are the portable pattern, and the labels are catalogued in the language pack (`meta/vaultos-lang-en.md`).
 
 Content varies by `kind`:
 
@@ -328,22 +329,22 @@ Content varies by `kind`:
 - **Type:** talk / paper / article (drawn from `source_path` directory)
 - **Foredragsholder/forfatter:** one line; wikilink the name (`[[Surname]]` or `[[Full Name]]`) so the source becomes a visible graph edge to the author's entity page. For talks, format as `[[Surname]] (org), role`.
 - **Dato / arena:** one line
-- **Nøkkelbegreper:** 3-5 short one-line definitions of vocabulary the body uses that a newcomer wouldn't know
+- **Key terms:** 3-5 short one-line definitions of vocabulary the body uses that a newcomer wouldn't know
 
-The infobox does **not** carry nøkkelpåstander; those live in the body's `## Nøkkelpåstander` section. The infobox is at-a-glance orientation (who/when/jargon), not a tl;dr.
+The infobox does **not** carry key claims; those live in the body's `## Key claims` section. The infobox is at-a-glance orientation (who/when/jargon), not a tl;dr.
 
 **Entity pages:**
 - **Type:** the page's `entity_type` (person / org / product / work / place / event / dataset / publication)
 - **Rolle:** one line, what they're known for
 - **Tilknytninger:** orgs / events / collaborators ([[wikilinks]])
 - **Kilder:** top 2-3 wiki source pages for this entity
-- **Nøkkelbegreper:** 3-5 short defs; optional if the entity isn't conceptually heavy
+- **Key terms:** 3-5 short defs; optional if the entity isn't conceptually heavy
 
 **Concept pages:**
 - **Kort definisjon** (tighter than the page's first line, can be formula-like)
 - **Argumentert av:** "N kilder" with top 2-3 wikilinked
 - **Relatert:** sister concepts ([[wikilinks]])
-- **Nøkkelbegreper:** 3-5 short defs of vocabulary the body uses
+- **Key terms:** 3-5 short defs of vocabulary the body uses
 
 **When to skip:**
 - Page is trivially short (stub entity with one source, no specialized terms)
@@ -355,12 +356,12 @@ The infobox does **not** carry nøkkelpåstander; those live in the body's `## N
 
 When `source_path` points into `raw/transcripts/`, extend the standard source page with these sections:
 
-- **`## Talere`:** one bullet per speaker, with name and role (host, guest, panelist, audience). Use the names that appear in cross-references throughout the wiki.
-- **`## Metadata for foredraget`:** venue, date of recording (if different from ingest date), event or series name, link to original recording if present in the raw file.
-- **`## Tidsstemplede høydepunkter`:** citable moments. Format: `- [HH:MM:SS] <speaker>: <claim or quote>`. Aim for 5–15 entries per hour of transcript, not exhaustive.
-- **`## Spørsmål og svar`** (optional): if the transcript has a Q&A segment, capture it here with per-turn attribution. Audience questions get their own bullets even when the asker is unnamed.
+- **`## Speakers`:** one bullet per speaker, with name and role (host, guest, panelist, audience). Use the names that appear in cross-references throughout the wiki.
+- **`## Talk metadata`:** venue, date of recording (if different from ingest date), event or series name, link to original recording if present in the raw file.
+- **`## Timestamped highlights`:** citable moments. Format: `- [HH:MM:SS] <speaker>: <claim or quote>`. Aim for 5–15 entries per hour of transcript, not exhaustive.
+- **`## Q&A`** (optional): if the transcript has a Q&A segment, capture it here with per-turn attribution. Audience questions get their own bullets even when the asker is unnamed.
 
-The base sections (`## Nøkkelpåstander`, `## Kontekst`, `## Åpne spørsmål`, `## Kryssreferanser`) still apply. Transcript-specific sections go between `## Kontekst` and `## Åpne spørsmål`.
+The base sections (`## Key claims`, `## Context`, `## Open questions`, `## Cross-references`) still apply. Transcript-specific sections go between `## Context` and `## Open questions`.
 
 ### Media logs and intent lists
 
@@ -378,8 +379,8 @@ The `/media-log-ingest` skill (B.4) operationalizes these conventions: parse and
 
 User-supplied material often carries the user's own steering, and every source has an origin type worth keeping visible. Two conventions follow.
 
-- **User-comment fields are steering input.** When a source carries a user note (the web-clipper `Egen kommentar` field, a margin note, a covering message), read it as the user's half of the Karpathy role-split: pointers, not dictation (same principle as §B.4.1). It carries **emphasis** (which points the user finds important: weight `## Nøkkelpåstander`, the ingress, and ordering accordingly) and the user's **own cross-links** (treat stated connections to other topics as concrete candidates for entity/concept wikilinks, `## Kryssreferanser`, tags, and synthesis seeds, not loose background). **It is additive emphasis, not a filter or a blinder.** Read and curate the whole source on its own merits first, then let the note lift and order what it flags. Never narrow coverage to only the flagged points, and stay alert to substance the user did not mention, including material that complicates or contradicts the user's own take. Tunnel vision on the comment is the failure mode to avoid: it steers focus and order, never whether material is covered. An empty field means no steering. Procedure detail lives in `/wiki-ingest`.
-- **Keep the source type visible so fact and assertion stay distinguishable.** Record what a source *is* as a neutral type (talk / paper / article / idea-note / dialogue / clipping) in the infobox `Type` line and frontmatter; attribute in-body per the four-bucket attribution rule ("X hevder", "ifølge Y"). This keeps the *origin type* legible: a reader can tell established/factual material from a source's own assertion or synthesis, and see where each came from. This is origin transparency, not a reliability ranking. Facts can be wrong and assertions can be right; what matters is knowing the origin. Provenance is a label, never a disclaimer of validity.
+- **User-comment fields are steering input.** When a source carries a user note (the web-clipper note/comment field, a margin note, a covering message), read it as the user's half of the Karpathy role-split: pointers, not dictation (same principle as §B.4.1). It carries **emphasis** (which points the user finds important: weight `## Key claims`, the ingress, and ordering accordingly) and the user's **own cross-links** (treat stated connections to other topics as concrete candidates for entity/concept wikilinks, `## Cross-references`, tags, and synthesis seeds, not loose background). **It is additive emphasis, not a filter or a blinder.** Read and curate the whole source on its own merits first, then let the note lift and order what it flags. Never narrow coverage to only the flagged points, and stay alert to substance the user did not mention, including material that complicates or contradicts the user's own take. Tunnel vision on the comment is the failure mode to avoid: it steers focus and order, never whether material is covered. An empty field means no steering. Procedure detail lives in `/wiki-ingest`.
+- **Keep the source type visible so fact and assertion stay distinguishable.** Record what a source *is* as a neutral type (talk / paper / article / idea-note / dialogue / clipping) in the infobox `Type` line and frontmatter; attribute in-body per the four-bucket attribution rule ("X argues", "according to Y"). This keeps the *origin type* legible: a reader can tell established/factual material from a source's own assertion or synthesis, and see where each came from. This is origin transparency, not a reliability ranking. Facts can be wrong and assertions can be right; what matters is knowing the origin. Provenance is a label, never a disclaimer of validity.
 
 ## B.4 Operations
 
@@ -409,7 +410,7 @@ The expanded rationale and portable recipe live in `meta/synthesis-generation-re
 
 **Explicit vault-backed mode:** only run the vault-backed synthesis workflow when the user asks for it with language such as "from the vault", "using existing sources", "scan the vault", "file a synthesis", or when the user has picked a previously proposed candidate to write. In survey mode, propose 3-5 candidates with source basis + one-line thesis and wait for the human to pick before filing.
 
-**During ingest:** notice synthesis seeds, strengthen role-labeled `## Kryssreferanser` entries, and log possible synthesis directions when a real 3+ source cluster appears. Do not auto-file synthesis pages during ingest.
+**During ingest:** notice synthesis seeds, strengthen role-labeled `## Cross-references` entries, and log possible synthesis directions when a real 3+ source cluster appears. Do not auto-file synthesis pages during ingest.
 
 **Synthesis provenance (frontmatter `trigger_skill:` + `trigger_mode:`).** Every filed synthesis carries both fields so audit doesn't have to depend on grepping `log.md`. `trigger_skill:` is the skill that filed the page (`wiki-synthesis`, `wiki-query` filing a followon, `wiki-lint` recording a lint-driven synthesis, or `wiki-ingest` in the rare case where a kryssref gesture during ingest leads to filing). `trigger_mode:` is the authority behind the filing:
 
@@ -558,7 +559,7 @@ Mechanical helpers that enforce or automate Part B rules. They are conveniences 
 - **`guard-protected.py`** (PreToolUse): on Write/Edit to frozen `raw/**` (B.2) or a protected file (B.12), returns a soft `ask` confirmation with a reason, even under `acceptEdits`. It confirms, never hard-denies. Triage routes with `mv`, so it fires only on the abnormal in-editor case.
 
 **Subagents** (`.claude/agents/`):
-- **`norsk-prosa`** (read-only; `Read, Grep, Glob`): reviews human-facing prose against the §A.6 anti-AI patterns and the naturlig-norsk idioms (bucket 3 of the writing standard). Reports violations with rewrites; does not edit. Invoke via `@agent-norsk-prosa` or a review request. This is the **wiki-language** prose reviewer (currently Norwegian); setup regenerates it as `<xx>-prosa` for any other wiki language (the §A.6 layer is language-independent and carries over). See `first-time.md` Phase 2. It overlaps with the planned `/wiki-editor`: when that is built it should incorporate or supersede `norsk-prosa` for the prose layer, not duplicate it.
+- **`prose-reviewer`** (read-only; `Read, Grep, Glob`): reviews human-facing prose against the §A.6 anti-AI patterns and the wiki language's idiom anti-patterns (bucket 3 of the writing standard; "Natural English" in the default pack). Reports violations with rewrites; does not edit. Invoke via `@agent-prose-reviewer` or a review request. This is the **wiki-language** prose reviewer (English by default); setup regenerates it for any other wiki language — a Norwegian `norsk-prosa` variant ships alongside for vaults that choose Norwegian (the §A.6 layer is language-independent and carries over). See `first-time.md` Phase 2. It overlaps with the planned `/wiki-editor`: when that is built it should incorporate or supersede the prose reviewer for the prose layer, not duplicate it.
 
 Helper scripts that are neither hooks nor agents (e.g. `pdf2md.py`, `optimize-images.py`) live in `tools/`: version-controlled, but outside wiki operations. **`tools/lint-scan.py`** is the read-only mechanical pre-pass for `/wiki-lint` (stdout-JSON, dependency-free, exit-code ABI; see the skill's Phase 0a). It reads schema-derived enums from `meta/vault-config.md` + `wiki/tags.md` and keeps a few constants inline; lint Check 9j watches that inline set for drift against §B.3, symmetric with 9i.
 
