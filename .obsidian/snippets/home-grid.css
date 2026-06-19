@@ -111,12 +111,12 @@
    reuse colors across callout types (tip/important share green; info/abstract
    share blue) which makes the grid read as fewer cards than there are.
    Forcing explicit hues here guarantees six visually separable cards. */
-.markdown-preview-view.card-grid .callout[data-callout="tip"]        { --callout-color: 236, 100, 130; } /* pink — Kultur */
-.markdown-preview-view.card-grid .callout[data-callout="info"]       { --callout-color:  80, 140, 220; } /* blue — Vitenskap */
-.markdown-preview-view.card-grid .callout[data-callout="example"]    { --callout-color: 160, 110, 215; } /* violet — AI og software */
-.markdown-preview-view.card-grid .callout[data-callout="success"]    { --callout-color: 235, 170,  55; } /* amber — Familie og økonomi */
-.markdown-preview-view.card-grid .callout[data-callout="important"]  { --callout-color:  90, 185, 110; } /* green — Hus og hage */
-.markdown-preview-view.card-grid .callout[data-callout="question"]   { --callout-color: 220,  95,  95; } /* red — Helse og trening */
+.markdown-preview-view.card-grid .callout[data-callout="tip"]        { --callout-color: 236, 100, 130; } /* pink — category 1 (e.g. Technology) */
+.markdown-preview-view.card-grid .callout[data-callout="info"]       { --callout-color:  80, 140, 220; } /* blue — category 2 (e.g. Science) */
+.markdown-preview-view.card-grid .callout[data-callout="example"]    { --callout-color: 160, 110, 215; } /* violet — category 3 (e.g. Culture) */
+.markdown-preview-view.card-grid .callout[data-callout="success"]    { --callout-color: 235, 170,  55; } /* amber — category 4 (e.g. Society & economy) */
+.markdown-preview-view.card-grid .callout[data-callout="important"]  { --callout-color:  90, 185, 110; } /* green — category 5 (e.g. Health) */
+.markdown-preview-view.card-grid .callout[data-callout="question"]   { --callout-color: 220,  95,  95; } /* red — category 6 (e.g. Personal) */
 
 /* Equal-height cards within a row — non-banner callouts stretch to fill the
    grid cell so the row reads as a clean band even when content differs in length.
