@@ -66,7 +66,7 @@ Triage first, then explain:
 The vault exists to be used. Asking permission on chores is itself a cost. Default to acting on reversible work; ask only when:
 
 - The action is destructive or hard to undo (deletion, force-push, mass rename).
-- The action edits a protected design doc (`CLAUDE.md`, `.claude/skills/**`, `meta/plan.md`) without prior accept in this thread.
+- The action edits a protected design doc (`CLAUDE.md`, `.claude/skills/**`, schema docs in `meta/`) without prior accept in this thread.
 - There's a real trade-off between options the user actually has to pick between.
 
 Don't ask before:
@@ -103,7 +103,7 @@ Match the report's tone to the work's actual stakes:
 
 # Part B: Vault schema
 
-This is a shared, LLM-maintained knowledge vault implementing Karpathy's LLM Wiki pattern (full source: [[Karpathy - LLM Wiki]]). Design rationale and decisions: [[meta/plan]]. Deferred items: [[backlog]].
+This is an LLM-maintained knowledge vault implementing Karpathy's LLM Wiki pattern (full source: [[Karpathy - LLM Wiki]]). Deferred items: [[backlog]].
 
 > [!info] Parametric config (Claude Code `@import`)
 > This schema reads parametrically. The per-vault parameters and the Norwegian language/form pack are imported below; Part B sections point into them rather than inlining the values. The pattern (rules) stays here in CLAUDE.md; the parameters (values) live in the imported files. The imports are parameter tables CLAUDE.md routes into, not a competing rulebook.
@@ -118,8 +118,8 @@ This is a shared, LLM-maintained knowledge vault implementing Karpathy's LLM Wik
 Pointers an incoming session should hit before non-trivial work:
 
 - **Before any non-trivial edit, read `handoff.md` and `todo.md` at the vault root.** If they say "No ongoing task" and your work isn't trivial, update them before stopping. For substantial follow-up, also read the linked handover under `meta/handovers/`. The full incoming/outgoing protocol lives in [[meta/handoff-protocol]].
-- **Open follow-ups live in the most recent lint report: [[Lint - 2026-06-11]].** Unchecked items in §1–§18 of that report are the active work queue. Suggested order of operations is in the report's final section.
-- **Read [[Karpathy - LLM Wiki]] and [[meta/plan]] before discussing system structure, intent, or schema changes.** [[Karpathy - LLM Wiki]] is Karpathy's original pattern document: the *why* behind the three-layer architecture and the schema-as-configuration premise. [[meta/plan]] records the decisions that shaped this specific instantiation. Don't propose schema edits without reading both.
+- **Once you have run `lint`, the most recent report under `wiki/syntheses/rapporter/lint-rapporter/` is the active work queue** — unchecked items are the follow-ups, and the report's final section suggests an order. A fresh vault has none yet.
+- **Read [[Karpathy - LLM Wiki]] before discussing system structure, intent, or schema changes.** It is Karpathy's original pattern document: the *why* behind the three-layer architecture and the schema-as-configuration premise. Don't propose schema edits without reading it.
 
 ## B.1 Purpose and premises
 
@@ -127,7 +127,7 @@ Pointers an incoming session should hit before non-trivial work:
 - **Canonical instruction file (CLAUDE.md / AGENTS.md) is a setup parameter; see `meta/vault-config.md` and §B.12.** One file holds the full schema; the other is a thin pointer to it. The choice follows the primary AI tool (Claude Code → `CLAUDE.md`; Codex or other → `AGENTS.md`).
 - **Hands-off ingest.** Whoever triggers ingest does so without per-source steering. This schema must be precise enough that you don't need to guess.
 - **Dynamic.** Old sources get re-ingested as models improve. Wiki pages record which model last touched them.
-- **Norwegian wiki, English meta.** Sources may arrive in any language; wiki content (`wiki/` page bodies, summaries, index entries, log entries, source pages) is written in Norwegian. Operational/meta documentation (`CLAUDE.md`, `AGENTS.md`, `meta/plan.md`, `meta/backlog.md`, this first-run plan, skills) stays in English unless explicitly requested otherwise. (Language is a per-vault parameter; see `meta/vault-config.md`. The Norwegian form details live in the swappable pack `meta/vaultos-lang-no.md`.)
+- **Norwegian wiki, English meta.** Sources may arrive in any language; wiki content (`wiki/` page bodies, summaries, index entries, log entries, source pages) is written in Norwegian. Operational/meta documentation (`CLAUDE.md`, `AGENTS.md`, `meta/**`, this first-run plan, skills) stays in English unless explicitly requested otherwise. (Language is a per-vault parameter; see `meta/vault-config.md`. The Norwegian form details live in the swappable pack `meta/vaultos-lang-no.md`.)
 
 ## B.2 Layout
 
@@ -501,7 +501,7 @@ Tracked in [[backlog]]:
 
 Subfolders under `personal/<domain>/` may include a `delt/` subfolder for content that's a candidate for sharing. **Default policy: `delt/` content stays in `personal/` permanently.** Promotion to `wiki/syntheses/` is not automatic and is not currently supported. Revisit if a real need emerges.
 
-See [[personal/README]] for scope details and what belongs where.
+See the personal-layer README (created at setup if you opt into a personal layer) for scope details and what belongs where.
 
 ## B.11 State layer (`handoff.md`, `todo.md`, `meta/handovers/`)
 
@@ -531,7 +531,7 @@ Some files define the operating rules rather than ordinary vault content. They n
 - `CLAUDE.md`
 - `AGENTS.md` — by default the read-only pointer to the canonical `CLAUDE.md`. Which of the two is canonical (full schema) vs. pointer is a setup parameter (`meta/vault-config.md` → "Canonical instruction file"); the setup wizard performs any swap. During normal work, treat the **pointer** file as read-only and edit the **canonical** file for schema changes — and even that only on explicit human accept.
 - `.claude/skills/**`
-- `meta/plan.md`, `meta/backlog.md`, and other schema/workflow design notes in `meta/`
+- `meta/backlog.md` and other schema/workflow design notes in `meta/`
 - `.obsidian/**` settings and snippets, unless the user is explicitly asking for Obsidian UI/config work
 
 A PreToolUse guard (`.claude/hooks/guard-protected.py`, see B.13) backs this list and the frozen `raw/**` zone with a soft `ask` confirmation on Write/Edit, even under `acceptEdits`. It confirms rather than blocks, and is a convenience; this section remains the authority.
@@ -558,8 +558,8 @@ Mechanical helpers that enforce or automate Part B rules. They are conveniences 
 - **`guard-protected.py`** (PreToolUse): on Write/Edit to frozen `raw/**` (B.2) or a protected file (B.12), returns a soft `ask` confirmation with a reason, even under `acceptEdits`. It confirms, never hard-denies. Triage routes with `mv`, so it fires only on the abnormal in-editor case.
 
 **Subagents** (`.claude/agents/`):
-- **`norsk-prosa`** (read-only; `Read, Grep, Glob`): reviews human-facing prose against the §A.6 anti-AI patterns and the naturlig-norsk idioms (bucket 3 of the writing standard). Reports violations with rewrites; does not edit. Invoke via `@agent-norsk-prosa` or a review request. This is the **wiki-language** prose reviewer (currently Norwegian); setup regenerates it as `<xx>-prosa` for any other wiki language (the §A.6 layer is language-independent and carries over). See `first-time.md` Phase 2. It overlaps with the planned `/wiki-editor` (proposal-010): when that is built it should incorporate or supersede `norsk-prosa` for the prose layer, not duplicate it.
+- **`norsk-prosa`** (read-only; `Read, Grep, Glob`): reviews human-facing prose against the §A.6 anti-AI patterns and the naturlig-norsk idioms (bucket 3 of the writing standard). Reports violations with rewrites; does not edit. Invoke via `@agent-norsk-prosa` or a review request. This is the **wiki-language** prose reviewer (currently Norwegian); setup regenerates it as `<xx>-prosa` for any other wiki language (the §A.6 layer is language-independent and carries over). See `first-time.md` Phase 2. It overlaps with the planned `/wiki-editor`: when that is built it should incorporate or supersede `norsk-prosa` for the prose layer, not duplicate it.
 
-Helper scripts that are neither hooks nor agents (e.g. the media-log digest) live in `tools/`: version-controlled, but outside wiki operations. **`tools/lint-scan.py`** is the read-only mechanical pre-pass for `/wiki-lint` (stdout-JSON, dependency-free, exit-code ABI; see the skill's Phase 0a and proposal-012). It reads schema-derived enums from `meta/vault-config.md` + `wiki/tags.md` and keeps a few constants inline; lint Check 9j watches that inline set for drift against §B.3, symmetric with 9i.
+Helper scripts that are neither hooks nor agents (e.g. `pdf2md.py`, `optimize-images.py`) live in `tools/`: version-controlled, but outside wiki operations. **`tools/lint-scan.py`** is the read-only mechanical pre-pass for `/wiki-lint` (stdout-JSON, dependency-free, exit-code ABI; see the skill's Phase 0a). It reads schema-derived enums from `meta/vault-config.md` + `wiki/tags.md` and keeps a few constants inline; lint Check 9j watches that inline set for drift against §B.3, symmetric with 9i.
 
 **`tools/pdf2md.py`** converts a PDF to Markdown while preserving embedded images (PyMuPDF; run `--report` first). Standing convention for book/document PDFs: convert with it, confirm the report shows text + all images captured (it refuses to greenlight scanned/OCR-needed PDFs), then delete the source PDF. Books live in `inbox/books/`, one `.md` per book (one file per chapter/story for collections, split by parsing the table of contents). Bulky source PDFs stay local-cold per `.gitignore`; the resulting markdown is tracked. Full usage in `tools/README.md`.
