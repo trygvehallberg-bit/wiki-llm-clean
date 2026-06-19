@@ -270,25 +270,25 @@ Same-source dedup still works under this rule: ingesting the Balakrishnan transc
 Tags exist to connect pages that would otherwise stay far apart: across time, across source, across kind. The canonical registry lives at `wiki/tags.md`. **Read it before tagging.**
 
 **Tag budget per page:**
-- **1 hovedtag** (top-level domain), required when a fit is clear. Drawn from the 5–10 hovedtags in `wiki/tags.md`.
+- **1 top-level tag** (top-level domain), required when a fit is clear. Drawn from the 5–10 top-level tags in `wiki/tags.md`.
 - **0–3 sub-tags:** specific themes that bridge this page to ≥2 others. Optional. Not every page needs sub-tags.
 - **Maks 4 tags total.** Pages without a clear thematic bridge stay at 1 tag.
 
-**Current hovedtags** are a per-vault parameter; see `meta/vault-config.md` for the list, with the canonical live registry at `wiki/tags.md` (read it before tagging). Hovedtags are tags and homepage entry points, **not folders**. Do not create a matching `wiki/01 Kultur/`-style taxonomy. Page placement stays governed by page kind (`wiki/sources/`, `wiki/concepts/`, `wiki/entities/`, `wiki/syntheses/`); domain grouping happens through frontmatter tags and the `wiki/home.md` cards.
+**Current top-level tags** are a per-vault parameter; see `meta/vault-config.md` for the list, with the canonical live registry at `wiki/tags.md` (read it before tagging). Top-level tags are tags and homepage entry points, **not folders**. Do not create a matching `wiki/01 Kultur/`-style taxonomy. Page placement stays governed by page kind (`wiki/sources/`, `wiki/concepts/`, `wiki/entities/`, `wiki/syntheses/`); domain grouping happens through frontmatter tags and the `wiki/home.md` cards.
 
 **Apply an existing tag freely** when it fits the page.
 
 **Propose a new sub-tag when:**
 - The tag would apply to **at least 2 existing pages + the page in front of you** (3 total minimum).
 - It does **bridge-work**: surfaces a connection between pages distant in source, time, or kind. Descriptive tags that duplicate what wikilinks already convey add nothing.
-- Add it to `wiki/tags.md` with a one-line definition under its nearest hovedtag, then apply retroactively to the matching pages.
+- Add it to `wiki/tags.md` with a one-line definition under its nearest top-level tag, then apply retroactively to the matching pages.
 
 **Don't create a tag when:**
 - One-page topic. The title and wikilinks already locate it.
 - The page already has 4 tags.
 - The tag would duplicate an existing tag's role.
 
-**Tag form:** lowercase, underscore-separated, ASCII. Short. Hyphens reserved for ISO dates and grammatical compounds elsewhere, not in tag slugs. Flat namespace (no `ai/agents`-style nesting in the tag itself; `tags.md` may visually group sub-tags under their hovedtag).
+**Tag form:** lowercase, underscore-separated, ASCII. Short. Hyphens reserved for ISO dates and grammatical compounds elsewhere, not in tag slugs. Flat namespace (no `ai/agents`-style nesting in the tag itself; `tags.md` may visually group sub-tags under their top-level tag).
 
 **Lint actively curates tags** (consolidation checks): dead tags (1 use) flagged for removal, recurring untagged themes flagged for new-tag proposal, existing tags that fit untagged pages flagged for retroactive application. Application of curation findings happens after the human reviews; lint itself never silently changes tags.
 

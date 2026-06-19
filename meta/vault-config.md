@@ -21,10 +21,10 @@ Which file holds the full schema; the other is a thin pointer to it. Set at setu
 
 Current: **`CLAUDE.md`**.
 
-## Hovedtags (top-level domains)
-Canonical **live** registry: `wiki/tags.md`. Read it before tagging. Current hovedtags:
-`kultur`, `vitenskap`, `ai_og_software`, `familie_og_okonomi`, `hus_og_hage`, `helse_og_trening`.
-These are tags + homepage entry points, **not folders** (no `wiki/01 Kultur/`-style taxonomy).
+## Top-level tags (top-level domains)
+Canonical **live** registry: `wiki/tags.md`. Read it before tagging. Starter top-level tags (the setup wizard sets these; edit freely):
+`technology`, `science`, `culture`, `society_and_economy`, `health`, `personal`.
+These are tags + homepage entry points, **not folders** (no `wiki/01 Culture/`-style taxonomy).
 
 ## Entity types (frontmatter `entity_type:` + infobox `Type`)
 Every `kind: entity` page carries `entity_type:` from this enum; the infobox `Type` line mirrors the value. Lint flags missing or out-of-enum values (Check 9h).

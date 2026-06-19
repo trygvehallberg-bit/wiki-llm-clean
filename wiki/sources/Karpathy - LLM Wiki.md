@@ -7,39 +7,39 @@ ingest_model: claude-opus-4-8
 source_path:
   - "raw/articles/2026-05-22_llm_wiki_karpathy.md"
 tags:
-  - teknologi
+  - technology
 ---
 
 > [!infobox]
-> **Type**: Idénotat / mønsterbeskrivelse
-> **Forfatter**: [[Andrej Karpathy]]
-> **Rolle i vaulten**: prinsippkilden for et persistent, LLM-vedlikeholdt wiki som mellomlag mellom råkilder og spørsmål — mønsteret denne vaulten implementerer
-> **Kilde**: `raw/articles/2026-05-22_llm_wiki_karpathy.md`
-> **Original**: [Karpathys offentlige gist (april 2026)](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
+> **Type**: Idea note / pattern description
+> **Author**: [[Andrej Karpathy]]
+> **Role in the vault**: the principle source for a persistent, LLM-maintained wiki as a layer between raw sources and questions — the pattern this vault implements
+> **Source**: `raw/articles/2026-05-22_llm_wiki_karpathy.md`
+> **Original**: [Karpathy's public gist (April 2026)](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
 
-Karpathy - LLM Wiki beskriver et mønster der en LLM ikke bare søker i dokumenter ved query-time, men bygger og vedlikeholder et persistent markdown-wiki som kompilert kunnskap.
+Karpathy - LLM Wiki describes a pattern where an LLM does not merely retrieve from documents at query time, but builds and maintains a persistent markdown wiki as compiled knowledge.
 
-## Nøkkelpåstander
+## Key claims
 
-- RAG gjenoppdager kunnskap ved hvert spørsmål, mens et vedlikeholdt wiki lar syntese, kryssreferanser og motsigelser akkumulere.
-- Råkilder bør være immutable, mens wiki-laget kan være agent-eid og kontinuerlig oppdatert.
-- Schema-filen er disiplinlaget som gjør agenten til wiki-vedlikeholder heller enn en generell chatbot.
-- `index.md` og `log.md` har ulike roller: index er innholdskatalog, logg er kronologisk operasjonshistorikk.
-- Nyttige svar bør kunne files tilbake i wikien som synteser, sammenligninger eller andre varige sider.
+- RAG rediscovers knowledge on every question, whereas a maintained wiki lets synthesis, cross-references, and contradictions accumulate.
+- Raw sources should be immutable, while the wiki layer can be agent-owned and continuously updated.
+- The schema file is the discipline layer that turns the agent into a wiki maintainer rather than a generic chatbot.
+- `index.md` and `log.md` play different roles: index is a content catalog, the log is chronological operation history.
+- Useful answers should be filable back into the wiki as syntheses, comparisons, or other durable pages.
 
-## Kontekst
+## Context
 
-Dette er den direkte arkitekturkilden for selve vault-mønsteret: `inbox`/`raw`/`wiki`, source-sider, entities, concepts, index og logg. Den beskriver prinsippet bak kompilert kunnskapsvedlikehold, ikke en bestemt app eller plugin.
+This is the direct architectural source for the vault pattern itself: `inbox`/`raw`/`wiki`, source pages, entities, concepts, index, and log. It describes the principle behind compiled knowledge maintenance, not a particular app or plugin.
 
-*Seed-eksempel i VaultOS-malen — det første source-eksempelet en ny vault leveres med, og kilden hele mønsteret bygger på.*
+*Seed example in the VaultOS template — the first source example a new vault ships with, and the source the whole pattern builds on.*
 
-## Åpne spørsmål
+## Open questions
 
-- Når blir index-basert navigasjon for liten, slik at lokalt søk eller hybrid BM25/vektor-søk trengs?
-- Hvilke typer svar er verdifulle nok til å files tilbake som egne wiki-sider?
-- Hvor strengt bør mennesket gå gjennom agentens wiki-endringer ved batch-ingest?
+- When does index-based navigation become too small, so that local search or hybrid BM25/vector search is needed?
+- Which kinds of answers are valuable enough to file back as their own wiki pages?
+- How strictly should the human review the agent's wiki edits during batch ingest?
 
-## Kryssreferanser
+## Cross-references
 
-- [[Andrej Karpathy]] — forfatter
-- [Karpathys LLM Wiki-gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) — den offentlige originalkilden teksten er gjengitt fra
+- [[Andrej Karpathy]] — author
+- [Karpathy's LLM Wiki gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) — the public original the text is reproduced from

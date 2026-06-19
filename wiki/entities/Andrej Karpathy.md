@@ -4,27 +4,28 @@ title: "Andrej Karpathy"
 created: 2026-05-23
 updated: 2026-05-30
 ingest_model: claude-opus-4-8
+entity_type: person
 sources:
   - "[[Karpathy - LLM Wiki]]"
 tags:
-  - teknologi
+  - technology
 ---
 
 > [!infobox]
 > **Type**: Person
-> **Rolle**: AI-forsker, pedagog og teknologientreprenør; kjent for å gjøre dyp læring tilgjengelig
-> **Kilder**: [[Karpathy - LLM Wiki]]
-> **Nøkkelbegreper**
-> - **LLM Wiki**: mønsteret denne vaulten implementerer — agenten bygger et strukturert wiki mellom deg og rå-kildene
-> - **Software 3.0**: Karpathys ramme for LLM-er som interpreter over kontekst, verktøy og minne
+> **Role**: AI researcher, educator, and technology entrepreneur; known for making deep learning accessible
+> **Sources**: [[Karpathy - LLM Wiki]]
+> **Key terms**
+> - **LLM Wiki**: the pattern this vault implements — the agent builds a structured wiki between you and the raw sources
+> - **Software 3.0**: Karpathy's framing of LLMs as an interpreter over context, tools, and memory
 
-Andrej Karpathy er en AI-forsker, pedagog og teknologientreprenør — medgründer av OpenAI, tidligere AI-direktør i Tesla — og en av feltets mest innflytelsesrike formidlere. I denne malen er han seed-eksempelet: forfatteren bak [[Karpathy - LLM Wiki|LLM Wiki-mønsteret]] som hele vaulten bygger på.
+Andrej Karpathy is an AI researcher, educator, and technology entrepreneur — a co-founder of OpenAI, former AI director at Tesla — and one of the field's most influential communicators. In this template he is the seed example: the author behind the [[Karpathy - LLM Wiki|LLM Wiki pattern]] the whole vault builds on.
 
-## Om personen
+## About the person
 
-Karpathy doktorerte ved Stanford under Fei-Fei Li, var medgründer av OpenAI (2015), ledet Teslas Autopilot (2017–2022), og grunnla siden Eureka Labs. Han er kjent for å gjøre avansert maskinlæring tilgjengelig gjennom kurs og essays — blant dem essayet som beskriver LLM Wiki-mønsteret.
+Karpathy earned his PhD at Stanford under Fei-Fei Li, co-founded OpenAI (2015), led Tesla's Autopilot (2017–2022), and later founded Eureka Labs. He is known for making advanced machine learning accessible through courses and essays — among them the essay that describes the LLM Wiki pattern.
 
-## Kryssreferanser
+## Cross-references
 
-- [[Karpathy - LLM Wiki]] — essayet om LLM Wiki-mønsteret (seed-kilden i denne malen)
-- [LLM Wiki-gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) — Karpathys offentlige originaldokument
+- [[Karpathy - LLM Wiki]] — the essay on the LLM Wiki pattern (the seed source in this template)
+- [LLM Wiki gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) — Karpathy's public original document

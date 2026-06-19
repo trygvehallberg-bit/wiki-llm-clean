@@ -114,7 +114,7 @@ Sub-checks across documents that are supposed to agree (CLAUDE.md, AGENTS.md, ev
 
 **9i. Automation layer drift (§B.13).** Cross-check the hooks and subagents documented in CLAUDE.md §B.13 against what actually exists. Catch: a hook listed in §B.13 but missing from `.claude/hooks/` or not wired in `.claude/settings.json` (or vice versa); a subagent in `.claude/agents/` not described in §B.13; the `.claude/skills/` → `.agents/skills/` mirror out of sync (the `mirror-skills.py` hook should keep them identical, so any divergence is a finding); the `norsk-prosa` subagent is the read-only prose-review tool for the Check 10 patterns, so prefer pointing the user to it over restating prose rules. Don't auto-fix; propose.
 
-**9j. `tools/lint-scan.py` schema drift.** The mechanical pre-pass (Phase 0a) reads most schema-derived values from `meta/vault-config.md` + `wiki/tags.md` (entity_type enum, hovedtags, reserved DNA names, model baseline, registered tags), but a few stay hardcoded because they aren't in a machine-readable config block: kind enum, tag budget, nav basenames, trigger_skill/trigger_mode vocab. Compare the script's `meta.schema_derived_inline` block against CLAUDE.md §B.3, and surface any `meta.config_warnings` (a section the script could not parse). Either is drift between the script and the schema it encodes — symmetric with 9i. Don't auto-fix; propose (usually a one-line constant edit or a vault-config section the script expects).
+**9j. `tools/lint-scan.py` schema drift.** The mechanical pre-pass (Phase 0a) reads most schema-derived values from `meta/vault-config.md` + `wiki/tags.md` (entity_type enum, top-level tags, reserved DNA names, model baseline, registered tags), but a few stay hardcoded because they aren't in a machine-readable config block: kind enum, tag budget, nav basenames, trigger_skill/trigger_mode vocab. Compare the script's `meta.schema_derived_inline` block against CLAUDE.md §B.3, and surface any `meta.config_warnings` (a section the script could not parse). Either is drift between the script and the schema it encodes — symmetric with 9i. Don't auto-fix; propose (usually a one-line constant edit or a vault-config section the script expects).
 
 For each finding, propose the fix in the lint report. Schema-layer fixes are usually one-line edits; flag them clearly so the user can land them in a single pass.
 
@@ -159,7 +159,7 @@ Checks 13–17 ask a different question from 1–12: not "what's wrong?" but "wh
 
 ### Check 13: Dead tags
 
-Tags currently applied to only 1 page (or 0 pages). Per CLAUDE.md B.3, one-page tags add nothing; the page's title and wikilinks already locate it. Propose removal from `wiki/tags.md` and the single using page. Exception: hovedtags stay even at low use; only sub-tags qualify.
+Tags currently applied to only 1 page (or 0 pages). Per CLAUDE.md B.3, one-page tags add nothing; the page's title and wikilinks already locate it. Propose removal from `wiki/tags.md` and the single using page. Exception: top-level tags stay even at low use; only sub-tags qualify.
 
 ### Check 14: Tag merge candidates
 

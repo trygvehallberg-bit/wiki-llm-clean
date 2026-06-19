@@ -1,12 +1,12 @@
 # Tags
 
-Canonical tag registry — read before tagging (CLAUDE.md §B.3 "Tags"). Tag budget per page: 1 hovedtag + 0–3 sub-tags, max 4.
+Canonical tag registry — read before tagging (CLAUDE.md §B.3 "Tags"). Tag budget per page: 1 top-level tag + 0–3 sub-tags, max 4.
 
-## Hovedtags (top-level domains)
+## Top-level tags (top-level domains)
 
 _Set during first-time setup. Starter suggestions (edit freely):_
 
-`teknologi` · `vitenskap` · `kultur` · `samfunn_og_okonomi` · `helse` · `personlig`
+`technology` · `science` · `culture` · `society_and_economy` · `health` · `personal`
 
 ## Sub-tags
 
