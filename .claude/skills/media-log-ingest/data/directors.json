@@ -1,5 +1,5 @@
 {
- "_note": "Seed film->regissor-attribuering for Letterboxd-ingest. Dette er DATA, ikke fasit: LLM-en leser den som utgangspunkt og utvider den for nye/ukjente titler. Ikke frosset. Skipes som en liten seed i template-en; den akkumulerer per vault etter hvert som du ingester.",
+ "_note": "Seed film->director attribution for Letterboxd ingest. This is DATA, not ground truth: the LLM reads it as a starting point and extends it for new/unknown titles. Not frozen. Ships as a small seed in the template; it accumulates per vault as you ingest.",
  "directors": {
   "Stanley Kubrick": [
    "2001: A Space Odyssey (1968)",

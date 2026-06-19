@@ -29,7 +29,7 @@ import sys, os, re, argparse
 try:
     import fitz  # PyMuPDF
 except ImportError:
-    sys.exit("Mangler PyMuPDF. Installer med: pip3 install --user pymupdf")
+    sys.exit("Missing PyMuPDF. Install with: pip3 install --user pymupdf")
 
 
 def reflow(text):
@@ -86,11 +86,11 @@ def convert(pdf_path, outdir):
                 os.makedirs(assets, exist_ok=True)
                 name = f"p{pno:03d}-img{ino:02d}.png"
                 pix.save(os.path.join(assets, name))
-                md.append(f"![{stem} – s.{pno} bilde {ino}](assets/{name})")
+                md.append(f"![{stem} – p.{pno} image {ino}](assets/{name})")
                 saved += 1
                 pix = None
             except Exception as e:
-                md.append(f"<!-- klarte ikke hente bilde p{pno} #{ino}: {e} -->")
+                md.append(f"<!-- could not extract image p{pno} #{ino}: {e} -->")
 
     out_md = os.path.join(outdir, f"{stem}.md")
     with open(out_md, "w") as f:
@@ -99,38 +99,38 @@ def convert(pdf_path, outdir):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="PDF -> Markdown med bildebevaring")
+    ap = argparse.ArgumentParser(description="PDF -> Markdown with image preservation")
     ap.add_argument("pdf")
     ap.add_argument("--outdir")
-    ap.add_argument("--report", action="store_true", help="Analyser uten å skrive")
+    ap.add_argument("--report", action="store_true", help="Analyze without writing")
     args = ap.parse_args()
 
     if not os.path.isfile(args.pdf):
-        sys.exit(f"Finner ikke: {args.pdf}")
+        sys.exit(f"Not found: {args.pdf}")
 
     doc = fitz.open(args.pdf)
     pages, chars, imgs, scanned = analyze(doc)
     print(f"PDF:    {args.pdf}")
-    print(f"Sider:  {pages}")
-    print(f"Tekst:  {chars} tegn  (~{chars//1800} sider med tekst)")
-    print(f"Bilder: {imgs} innebygde")
+    print(f"Pages:  {pages}")
+    print(f"Text:   {chars} chars  (~{chars//1800} pages of text)")
+    print(f"Images: {imgs} embedded")
     if scanned:
-        print("ADVARSEL: ser skannet ut (lite tekstlag). Trenger OCR – "
-              "tekst blir tom uten. IKKE slett PDF-en før OCR er gjort.")
+        print("WARNING: looks scanned (little text layer). Needs OCR – "
+              "text will be empty without it. Do NOT delete the PDF before OCR.")
     if args.report:
-        print("\n(report-modus: ingenting skrevet)")
+        print("\n(report mode: nothing written)")
         return
 
     outdir = args.outdir or os.path.join(
         os.path.dirname(args.pdf) or ".",
         os.path.splitext(os.path.basename(args.pdf))[0])
     out_md, saved = convert(args.pdf, outdir)
-    print(f"\nSkrev:  {out_md}")
-    print(f"Bilder lagret: {saved}/{imgs} -> {os.path.join(outdir,'assets')}/")
+    print(f"\nWrote:  {out_md}")
+    print(f"Images saved: {saved}/{imgs} -> {os.path.join(outdir,'assets')}/")
     ok = (not scanned) and chars > 200 and saved == imgs
-    print("\nTrygt å slette original-PDF? " +
-          ("JA – tekst + alle bilder fanget." if ok
-           else "NEI – sjekk advarsler/bildeantall over først."))
+    print("\nSafe to delete the original PDF? " +
+          ("YES – text + all images captured." if ok
+           else "NO – check the warnings/image count above first."))
 
 
 if __name__ == "__main__":

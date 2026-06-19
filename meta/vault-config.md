@@ -26,7 +26,7 @@ Every `kind: entity` page carries `entity_type:` from this enum; the infobox `Ty
 Routing for ambiguous cases: band/ensemble → `org`; newspaper/podcast/blog → `publication`; a country → `place`; a theory or idea → not an entity (`kind: concept`); a work with its own source page stays on the source page (use `work` only when the work is referenced as a thing across pages).
 
 ## Personal domains (`personal/<domain>/`)
-helse, økonomi, hus og hage, … (extensible). Personal-layer rules: §B.10.
+health, finance, home & garden, … (extensible). Personal-layer rules: §B.10.
 
 ## Source-type folders (under `raw/`)
 `articles/`, `papers/`, `transcripts/`, `media_logs/`, `assets/`.
@@ -52,6 +52,6 @@ The agent-instruction filenames AI tooling auto-loads as project context. Wiki e
 Current default model id: **`claude-opus-4-8`**. Lint flags sources still on an older id as re-ingest candidates. Update this when the default model advances.
 
 ## Ingest-recommended tier (model floor at ingest time)
-**Praktisk standard:** Sonnet eller GPT-5.3-Codex gjør jobben for ingest; vil du ha litt ekstra polish, kjør en topp-modell (Opus eller GPT-5.5) på **high/Høy**. Max er aldri nødvendig. Unngå Haiku-klassen.
+**Practical standard:** Sonnet or GPT-5.3-Codex does the job for ingest; for a little extra polish, run a top-tier model (Opus or GPT-5.5) at **high**. Max is never needed. Avoid the Haiku class.
 
-Detalj, fra den blinde benchmarken 2026-05-31 ([[Modell-benchmark for ingest - 2026-05-31]]). **Topp (likeverdige, 48/48):** Opus/high og GPT-5.5/Høy. **Ett hakk under, fullt brukbart (~42–43):** Sonnet og GPT-5.3-Codex (effort betyr nesten ingenting: Sonnet/medium ≈ Sonnet/max; Codex tapte bare en fiksbar index-førstelinje, prosaen var topp). **Unngå for ingest (34, prosakollaps):** Haiku-klassen, med kryss-språk-innslag og kjønnsfeil (forfatterdrevet, ikke artefakt). Reasoning-effort over «high»/«Høy» gir ingenting. Styrer `wiki-ingest`-åpningsnoten (§B.4.0), som varsler **kun** på Haiku-klassen (aldri på Sonnet/Opus/GPT-5.5/5.3-Codex), og batch-plan-portens modellbekreftelse. Revurder når modell-id-baseline over avanserer.
+Detail, from a blind benchmark. **Top (tied, 48/48):** Opus/high and GPT-5.5/high. **One notch down, fully usable (~42–43):** Sonnet and GPT-5.3-Codex (effort barely matters: Sonnet/medium ≈ Sonnet/max; Codex lost only a fixable index first-line, the prose was top). **Avoid for ingest (34, prose collapse):** the Haiku class, with cross-language bleed and gender errors (author-driven, not an artifact). Reasoning effort above "high" adds nothing. This drives the `wiki-ingest` opening note (§B.4.0), which warns **only** on the Haiku class (never on Sonnet/Opus/GPT-5.5/5.3-Codex), and the batch-plan gate's model confirmation. Revisit when the model-id baseline above advances.

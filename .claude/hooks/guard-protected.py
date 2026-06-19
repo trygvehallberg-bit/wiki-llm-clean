@@ -21,21 +21,21 @@ def rule(norm):
     """Return (label, reason) if the path is guarded, else None."""
     if "/raw/" in norm:
         return (
-            "raw-frys",
-            "raw/ er frosset arkiv etter triage (§B.2). Skriving/redigering her er "
-            "normalt feil — triage flytter filer inn med mv, ikke Write/Edit. "
-            "Bekreft at dette er en bevisst triage-destinasjon.",
+            "raw-frozen",
+            "raw/ is a frozen archive after triage (§B.2). Writing/editing here is "
+            "normally a mistake — triage moves files in with mv, not Write/Edit. "
+            "Confirm this is a deliberate triage destination.",
         )
     if norm.endswith("/CLAUDE.md"):
-        return ("beskyttet", "CLAUDE.md er beskyttet (§B.12) — krever uttrykkelig godkjenning.")
+        return ("protected", "CLAUDE.md is protected (§B.12) — requires explicit approval.")
     if norm.endswith("/AGENTS.md"):
-        return ("beskyttet", "AGENTS.md er en read-only peker (§B.12) — skal normalt ikke endres.")
+        return ("protected", "AGENTS.md is a read-only pointer (§B.12) — should normally not be edited.")
     if "/.claude/skills/" in norm:
-        return ("beskyttet", ".claude/skills/** er beskyttet (§B.12) — krever uttrykkelig godkjenning.")
+        return ("protected", ".claude/skills/** is protected (§B.12) — requires explicit approval.")
     if "/.obsidian/" in norm:
-        return ("beskyttet", ".obsidian/** endres bare ved eksplisitt Obsidian-config-arbeid (§B.12).")
+        return ("protected", ".obsidian/** is edited only during explicit Obsidian-config work (§B.12).")
     if "/meta/" in norm and "/meta/handovers/" not in norm:
-        return ("beskyttet", "meta/ er menneske-kuratert (§B.2/§B.12) — endre bare når du blir bedt om det.")
+        return ("protected", "meta/ is human-curated (§B.2/§B.12) — edit only when asked.")
     return None
 
 

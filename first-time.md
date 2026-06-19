@@ -15,6 +15,9 @@
 
 This bootstraps the state layer and demonstrates the loop at the same time. Rules: `meta/handoff-protocol.md`.
 
+> [!note] Automation layer (Claude Code)
+> This clone ships background hooks (`.claude/hooks/`: frontmatter-date bump, protected-file guard, non-Claude skill mirror), wired in `.claude/settings.json` and loaded at session start. They need `python` on the PATH; if it is missing they simply no-op and nothing breaks. Setup does not depend on them — just be aware they exist (e.g. if `updated:` dates stop bumping, that's a missing `python`).
+
 ## Phase 1 — Ask the setup questions
 
 Conversational, a few at a time, with the suggested options. The first is the only functionally critical one.

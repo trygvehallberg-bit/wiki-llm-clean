@@ -67,6 +67,8 @@ wiki/     Agent-maintained knowledge layer.
   syntheses/   Analyses, comparisons, lint reports.
   index.md, log.md, overview.md, tags.md
 meta/     Docs about this vault (design, backlog, source pattern).
+tools/    Helper scripts (PDF→Markdown, lint pre-pass, image optimizer).
+.claude/  Agent config: skills, hooks, subagents, settings.
 ```
 
 **Graph view colors**: blue = entities, green = concepts, orange = sources, purple = syntheses, yellow = inbox, gray = raw/meta. For file explorer tints too, enable the CSS snippet under Settings → Appearance.
@@ -83,6 +85,10 @@ meta/     Docs about this vault (design, backlog, source pattern).
 
 You never write to `wiki/` directly. The AI is the sole author there. Humans only add to `inbox/` and ask questions.
 
+Beyond the core loop, topic-triggered **specialized skills** kick in when relevant: bulk media-log imports (`media-log-ingest`, for Goodreads/Letterboxd/Kindle exports), poem analysis (`dikt-analyse-norsk`), and analytical parables (`wiki-parable`). You don't invoke them by name — they trigger from what you ask.
+
+A small **automation layer** runs quietly in the background (Claude Code only): hooks that bump the `updated:` date on edited pages, guard protected files, and keep the non-Claude agent mirror in sync. They need `python` on the PATH; if it's missing they simply no-op and nothing breaks.
+
 ## What you do
 
 - Drop sources into `inbox/`.
@@ -96,6 +102,8 @@ You never write to `wiki/` directly. The AI is the sole author there. Humans onl
 - **`CLAUDE.md`** — the full operational schema. Auto-loaded by Claude Code; you can read it yourself to understand the rules.
 - **`meta/vaultos-manifest.md`** — what counts as portable VaultOS vs instance content (the package boundary).
 - **`meta/LLM Wiki - Karpathy.md`** — Karpathy's original pattern this vault implements.
+- **`.claude/`** — the agent layer: skills (the operations), hooks (the background automation), subagents, and settings.
+- **`tools/`** — standalone helper scripts (run by hand): `pdf2md.py`, `lint-scan.py`, `optimize-images.py`. See `tools/README.md`.
 - **`wiki/log.md`** — chronological record of every operation the AI has performed.
 
 ## Conventions in one breath

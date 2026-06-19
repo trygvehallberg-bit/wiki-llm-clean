@@ -17,10 +17,10 @@ python3 tools/pdf2md.py <input.pdf>              # convert -> <stem>/<stem>.md +
 **Workflow / deletion policy:**
 1. Run with `--report` first.
 2. Convert. The tool **preserves images/graphs** into `assets/` and references them inline.
-3. **Delete the source PDF only after** the report's verdict says "trygt å slette" — i.e. text captured, all images saved, and it is not a scanned/OCR-needed PDF. The tool refuses to greenlight scanned PDFs (no text layer → would need OCR via `tesseract`, not yet installed).
+3. **Delete the source PDF only after** the report's verdict says "safe to delete" — i.e. text captured, all images saved, and it is not a scanned/OCR-needed PDF. The tool refuses to greenlight scanned PDFs (no text layer → would need OCR via `tesseract`, not yet installed).
 
 **Conventions:**
-- Books live in `inbox/hele_bøker/`, one `.md` per book.
+- Books live in `inbox/books/`, one `.md` per book.
 - For a *collection* (e.g. Kafka *The Complete Stories*), split into one file per
   text by parsing the table of contents, plus an `index.md`. `pdf2md.py` does the
   whole-PDF conversion; the per-chapter/story split is a per-book step (every TOC

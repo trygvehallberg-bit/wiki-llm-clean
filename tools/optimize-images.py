@@ -96,11 +96,11 @@ def main():
             cmd += [p]
             subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-    print(f"\n{acted} filer over grensen.  {before//1024} MB -> ~{after_est//1024} MB "
-          f"(anslag, sparer ~{(before-after_est)//1024} MB)")
+    print(f"\n{acted} files over the limit.  {before//1024} MB -> ~{after_est//1024} MB "
+          f"(estimate, saves ~{(before-after_est)//1024} MB)")
     if not a.apply:
-        print("TØRRKJØRING — ingenting endret. Kjør med --apply for å utføre "
-              "(originaler sikkerhetskopieres til _image-originals/).")
+        print("DRY RUN — nothing changed. Run with --apply to act "
+              "(originals are backed up to _image-originals/).")
 
 if __name__ == "__main__":
     main()

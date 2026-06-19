@@ -153,7 +153,7 @@ Personal Notes 2/
 │   ├── synthesis-generation-recipe.md
 │   ├── handoff-protocol.md           ← rules for handoff.md, todo.md, and handovers/
 │   ├── feedback/                     ← design proposals (proposal-NNN-*)
-│   ├── språk/                        ← source notes behind the writing standard
+│   ├── style/                        ← source notes behind the writing standard
 │   ├── handovers/                    ← dated detailed handovers after substantial work
 │   └── …                             ← working dirs (history, ideas, model-test, export)
 ├── inbox/           ← STAGING. Humans drop files here; triage moves them to raw/.
@@ -177,7 +177,7 @@ Personal Notes 2/
 │   └── syntheses/   ← analyses, comparisons, lint reports
 ├── tools/           ← versioned helper scripts (e.g. media-log digest); not wiki content
 └── personal/        ← Personal operational layer. OUTSIDE wiki schema and wiki ops. See B.10.
-    └── <domain>/    ← personal domains (helse, økonomi, hus og hage, …), each with personal data and notes
+    └── <domain>/    ← personal domains (health, finance, home & garden, …), each with personal data and notes
 ```
 
 **Read/write boundaries:**
@@ -192,9 +192,9 @@ Personal Notes 2/
 
 **Audience: human-first vs. agent-first.**
 
-Noen sider er skrevet for menneskelig lesning: `wiki/{entities,concepts,sources}/**`, substantielle synteser, `wiki/{home,overview,index}.md`. §B.3 Naturlig-norsk-mønstre, infobox-disiplin og first-line stranger-test gjelder her.
+Some pages are written for human reading: `wiki/{entities,concepts,sources}/**`, substantial syntheses, `wiki/{home,overview,index}.md`. The §B.3 mother-tongue idiom patterns, infobox discipline, and first-line stranger test all apply here.
 
-Andre sider er agent-først arbeidsartefakter: `handoff.md`, `todo.md`, `meta/handovers/**`, `wiki/log.md`, og daterte outputs som `wiki/syntheses/rapporter/Triage - YYYY-MM-DD.md`, `wiki/syntheses/rapporter/lint-rapporter/Lint - YYYY-MM-DD.md` og `wiki/syntheses/rapporter/Reingest - <topic> - YYYY-MM-DD.md`. Telegrafisk format, checkbox-tabeller og filsti-enumerering er funksjonelt riktig her. Naturlig-norsk-lint, infobox-regel og stranger-test gjelder ikke. Lint og ingest leser denne aksen heller enn å enumerere unntak.
+Other pages are agent-first working artifacts: `handoff.md`, `todo.md`, `meta/handovers/**`, `wiki/log.md`, and dated outputs such as `wiki/syntheses/rapporter/Triage - YYYY-MM-DD.md`, `wiki/syntheses/rapporter/lint-rapporter/Lint - YYYY-MM-DD.md`, and `wiki/syntheses/rapporter/Reingest - <topic> - YYYY-MM-DD.md`. Telegraphic format, checkbox tables, and file-path enumeration are functionally correct here. The mother-tongue prose lint, the infobox rule, and the stranger test do not apply. Lint and ingest read this axis rather than enumerating exceptions.
 
 **Plugin-sync roots (e.g. `raw/Snipd/`):**
 
@@ -399,7 +399,7 @@ Specialized skills (same authority split, invoked by topic rather than as part o
 
 Any operation expected to touch more than ~15 wiki pages, or to run on more than one source in a single invocation, presents a one-paragraph plan first (scope, expected touches, risks) and waits for go. Single-source ingest stays fully hands-off (per B.5). Anchored on the LLM Wiki principle: **"Ingest one at a time, stay involved."**
 
-**Model-awareness (not friction).** Ingest quality is model-dependent, but the bar is easy to clear (see "Ingest-recommended tier" in `meta/vault-config.md`): both ecosystems' top tiers (Opus/high, GPT-5.5/Høy) tied at the top, and one notch down (Sonnet, GPT-5.3-Codex) is fully usable. Single-source ingest stays hands-off, with no blocking model question. `wiki-ingest` stays silent on every workhorse-or-better tier (Sonnet, Opus, GPT-5.5, GPT-5.3-Codex) and flags only the case that actually hurts: the weakest tier that collapses prose (Haiku-class), where it emits a one-line note at its opening (no gate; the colleague stays in control). Batch / multi-source ingest folds model + effort confirmation into the plan-before-run pause above, rather than adding a new interruption point.
+**Model-awareness (not friction).** Ingest quality is model-dependent, but the bar is easy to clear (see "Ingest-recommended tier" in `meta/vault-config.md`): both ecosystems' top tiers (Opus/high, GPT-5.5/high) tied at the top, and one notch down (Sonnet, GPT-5.3-Codex) is fully usable. Single-source ingest stays hands-off, with no blocking model question. `wiki-ingest` stays silent on every workhorse-or-better tier (Sonnet, Opus, GPT-5.5, GPT-5.3-Codex) and flags only the case that actually hurts: the weakest tier that collapses prose (Haiku-class), where it emits a one-line note at its opening (no gate; the colleague stays in control). Batch / multi-source ingest folds model + effort confirmation into the plan-before-run pause above, rather than adding a new interruption point.
 
 ### B.4.1 Synthesis generation modes
 
@@ -562,4 +562,4 @@ Mechanical helpers that enforce or automate Part B rules. They are conveniences 
 
 Helper scripts that are neither hooks nor agents (e.g. the media-log digest) live in `tools/`: version-controlled, but outside wiki operations. **`tools/lint-scan.py`** is the read-only mechanical pre-pass for `/wiki-lint` (stdout-JSON, dependency-free, exit-code ABI; see the skill's Phase 0a and proposal-012). It reads schema-derived enums from `meta/vault-config.md` + `wiki/tags.md` and keeps a few constants inline; lint Check 9j watches that inline set for drift against §B.3, symmetric with 9i.
 
-**`tools/pdf2md.py`** converts a PDF to Markdown while preserving embedded images (PyMuPDF; run `--report` first). Standing convention for book/document PDFs: convert with it, confirm the report shows text + all images captured (it refuses to greenlight scanned/OCR-needed PDFs), then delete the source PDF. Books live in `inbox/hele_bøker/`, one `.md` per book (one file per chapter/story for collections, split by parsing the table of contents). Bulky source PDFs stay local-cold per `.gitignore`; the resulting markdown is tracked. Full usage in `tools/README.md`.
+**`tools/pdf2md.py`** converts a PDF to Markdown while preserving embedded images (PyMuPDF; run `--report` first). Standing convention for book/document PDFs: convert with it, confirm the report shows text + all images captured (it refuses to greenlight scanned/OCR-needed PDFs), then delete the source PDF. Books live in `inbox/books/`, one `.md` per book (one file per chapter/story for collections, split by parsing the table of contents). Bulky source PDFs stay local-cold per `.gitignore`; the resulting markdown is tracked. Full usage in `tools/README.md`.

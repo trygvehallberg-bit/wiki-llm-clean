@@ -168,7 +168,7 @@
   margin-bottom: 0.4rem;
 }
 
-/* "Største områder" sub-nav list — a touch smaller and tighter than the card body. */
+/* "Largest areas" sub-nav list — a touch smaller and tighter than the card body. */
 .markdown-preview-view.card-grid .callout:not([data-callout="banner"]) .callout-content ul {
   font-size: 0.86em;
   line-height: 1.4;
