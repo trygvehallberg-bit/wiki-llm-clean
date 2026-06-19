@@ -57,7 +57,7 @@ If the answer required **real synthesis** (3+ pages combined, a novel comparison
 Do not offer casual filing as the default. File only if the user explicitly asks to create/write/file the synthesis page, or if they select a candidate and ask for it to be written. When that happens:
 
 1. Create the synthesis page per CLAUDE.md B.3 (kind: synthesis, frontmatter shape, sources list, body). Set `trigger_skill: wiki-query` and `trigger_mode:` per CLAUDE.md §B.4.1: `user-requested` if they explicitly asked to file, `user-selected` if they picked from a slate, `agent-followon` only when filing was inferred from a clear user gesture (kryssref hint, "go ahead", an existing pre-filed-by-user stub).
-2. Add backlinks: a one-line reference from each cited source page's `## Kryssreferanser` section pointing back to the synthesis (Norwegian section name per CLAUDE.md B.3).
+2. Add backlinks: a one-line reference from each cited source page's `## Cross-references` section pointing back to the synthesis (section name per CLAUDE.md B.3).
 3. Add the synthesis to `wiki/index.md` under `## Syntheses`.
 4. Append a log entry: `## [YYYY-MM-DD] synthesis | <title>` with a one-line summary. The log narrative complements the frontmatter trigger fields; both exist so audit doesn't depend on either alone.
 
@@ -65,7 +65,7 @@ Otherwise, the answer stays as conversation only; don't file it.
 
 ### Special case: overview.md
 
-The question *"hva handler denne vaulten om akkurat nå?"* (what is this vault currently about?) is a **standing query** whose filed answer is `wiki/overview.md`, not a dated synthesis under `wiki/syntheses/`. When the user asks it, or asks to refresh overview because material has shifted, run the query and overwrite `overview.md` with the new answer. Overview is navigational per CLAUDE.md §B.3: no callouts, no infobox. Lint flags staleness (Check 12); lint never regenerates.
+The question *"what is this vault currently about?"* is a **standing query** whose filed answer is `wiki/overview.md`, not a dated synthesis under `wiki/syntheses/`. When the user asks it, or asks to refresh overview because material has shifted, run the query and overwrite `overview.md` with the new answer. Overview is navigational per CLAUDE.md §B.3: no callouts, no infobox. Lint flags staleness (Check 12); lint never regenerates.
 
 ## Phase 5: Spot follow-up work (optional)
 
@@ -94,14 +94,14 @@ tags: []
 
 <Body. Wikilink every claim to its supporting source. Use `> [!warning] Conflict` if sources disagree.>
 
-## Åpne spørsmål
+## Open questions
 
 - <Where the synthesis is incomplete; what would extend it.>
 
-## Kryssreferanser
+## Cross-references
 
-- Kilder syntetisert: <wikilinks>
-- Relaterte konsepter: <wikilinks>
+- Sources synthesized: <wikilinks>
+- Related concepts: <wikilinks>
 - Relaterte synteser: <wikilinks>
 ```
 

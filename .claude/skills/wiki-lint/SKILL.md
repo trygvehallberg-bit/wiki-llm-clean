@@ -126,15 +126,15 @@ Diagnoses pages against the full four-bucket writing & structure standard (`meta
 
 **(b) Missing `[!infobox]` on jargon-heavy pages.** Source / entity / concept pages without an `[!infobox]` callout get flagged if the body uses specialized vocabulary a newcomer wouldn't know. Trivially short pages (one-paragraph entities, no jargon) are not flagged. The infobox should carry kind-specific content (see CLAUDE.md B.3 "Infobox sidebar") with 3-5 key-term definitions inline. Propose the page in the report with a brief sketch of what the infobox should contain.
 
-**(c) Prose quality.** Spot-check 5–10 random source/entity/concept pages for the anti-AI-prose patterns. The language-independent ones live in CLAUDE.md §A.6 (reflexive contrastive negation, signal phrases, em-dash habit, modal hedging, amputated fragments, nominalization); the Norwegian-specific ones live in `meta/vaultos-lang-no.md` "Naturlig norsk" (wrong prepositions for languages, "skrev i" → "skrev på"; stranded English-pattern prepositions; Latinate -or/-asjon nominalizations where a verb form would be natural; unmarked anglicisms like "Status: live", "outgrows itself"). Flag specific lines in the report with proposed rewrites; flag-only, never auto-fix. Skip agent-first pages per CLAUDE.md §B.2 audience-axis (telegrafisk format er funksjonelt riktig der).
+**(c) Prose quality.** Spot-check 5–10 random source/entity/concept pages for the anti-AI-prose patterns. The language-independent ones live in CLAUDE.md §A.6 (reflexive contrastive negation, signal phrases, em-dash habit, modal hedging, amputated fragments, nominalization); the wiki-language-specific ones live in the active pack's "Natural <language>" section (`meta/vaultos-lang-en.md` by default — plain-verb preference, consistent spelling convention, no false register-lift; the Norwegian pack instead flags wrong language prepositions, stranded English-pattern prepositions, Latinate nominalizations, and unmarked anglicisms). Flag specific lines in the report with proposed rewrites; flag-only, never auto-fix. Skip agent-first pages per CLAUDE.md §B.2 audience-axis (their telegraphic format is intentional).
 
-**(d) Systematic anglicism scan.** Where (c) spot-checks 5–10 pages, (d) is a full-vault regex sweep for the most detectable anglicism markers (the unmarked-anglicism pattern in `meta/vaultos-lang-no.md` "Naturlig norsk"). Patterns:
-- English `-s`/`-es` verb forms in Norwegian context: `\b(refreshes|outgrows|fails|triggers|files|runs|works)\b` followed by Norwegian preposition/adverb
+**(d) Systematic idiom sweep (wiki-language-specific).** Where (c) spot-checks 5–10 pages, (d) is a full-vault regex sweep for the most detectable idiom markers the active pack defines. This check is only as meaningful as the language's loanword-bleed problem: for an **English** wiki (the default) there is little to scan, so it is largely inactive; for a **Norwegian** wiki it is the unmarked-anglicism sweep from `meta/vaultos-lang-no.md` "Naturlig norsk". Example patterns (Norwegian pack):
+- English `-s`/`-es` verb forms in Norwegian context: `\b(refreshes|outgrows|fails|triggers|files|runs|works)\b` followed by a Norwegian preposition/adverb
 - Recurring anglicism phrases: `Status: live`, `fails silently`, `audit trail`, `vanity-dashboard`, `judgment-heavy`, `spot-check`, `outgrows itself`
 
 Run as one pass on `wiki/sources/`, `wiki/entities/`, `wiki/concepts/`, `wiki/syntheses/` bodies (skip infoboxes since their telegram form is intentional; skip agent-first pages per CLAUDE.md §B.2 audience-axis). Flag-only; never auto-fix.
 
-**(e) Structure & content (the rest of the four-bucket standard).** Spot-check the same pages against buckets 1 (struktur), 2 (klarhet beyond the first line), and 4 (innhold) of the writing standard (`meta/vaultos-lang-no.md`): does the first sentence define the headword and the opening paragraph work as an ingress? rising difficulty (simple/important first, complex last)? one page, one topic (flag topic-fusion as a split candidate)? right length, not maximal? jargon defined once and never explained with other jargon? contested claims attributed, no implicit value judgments? durable phrasing (no "nylig"/datestamping, concrete years)? Flag specific pages with the bucket and the gap; flag-only, never auto-fix. Skip agent-first pages per CLAUDE.md §B.2 audience-axis.
+**(e) Structure & content (the rest of the four-bucket standard).** Spot-check the same pages against buckets 1 (structure), 2 (clarity beyond the first line), and 4 (content) of the writing standard (`meta/vaultos-lang-en.md`): does the first sentence define the headword and the opening paragraph work as a lead? rising difficulty (simple/important first, complex last)? one page, one topic (flag topic-fusion as a split candidate)? right length, not maximal? jargon defined once and never explained with other jargon? contested claims attributed, no implicit value judgments? durable phrasing (no "recently"/datestamping, concrete years)? Flag specific pages with the bucket and the gap; flag-only, never auto-fix. Skip agent-first pages per CLAUDE.md §B.2 audience-axis.
 
 When the volume of flags is large (e.g., during the 2026-05 retroactive cleanup pass), group findings by page kind (sources first, then concepts, then entities) and by severity. Concept pages probably go first overall since their definitions propagate into many source pages.
 
@@ -144,8 +144,8 @@ This is an idea-candidate check, not a missing-page error. Do not say the vault 
 
 Flag:
 
-- Source pages whose `## Kryssreferanser` contain bare wikilinks with no role labels.
-- Concept pages that gather multiple sources but lack an explicit source-bullet tally such as `## Argued by` or a Norwegian equivalent.
+- Source pages whose `## Cross-references` contain bare wikilinks with no role labels.
+- Concept pages that gather multiple sources but lack an explicit source-bullet tally such as `## Argued by` or the wiki language's equivalent.
 - Log entries that are too mechanical to carry synthesis signal, especially entries that omit clusters joined or candidate ideas surfaced.
 - 3+ source clusters that look like possible synthesis ideas. Phrase them as candidates, not required fixes.
 
@@ -179,17 +179,15 @@ Where Check 4 flags "3+ pages mention this concept but no concept page exists," 
 
 ### Check 18: Meta-synthesis open questions
 
-Some syntheses are *about the vault itself* and aggregate open architectural questions that affect future schema, operation, or scope decisions. Their `## Åpne spørsmål` sections are easy to forget because they live on synthesis pages that nobody routinely re-reads.
+Some syntheses are *about the vault itself* and aggregate open architectural questions that affect future schema, operation, or scope decisions. Their `## Open questions` sections are easy to forget because they live on synthesis pages that nobody routinely re-reads.
 
-This check is **flag-only surfacing** (distinct from Check 7's term-matching): read `## Åpne spørsmål` from each meta-synthesis below and list every bullet verbatim in the lint report under a section header `## §18 Åpne arkitektur-spørsmål`, with the source synthesis named for each bullet. No term-matching, no resolution attempts, no proposed answers; just visibility.
+This check is **flag-only surfacing** (distinct from Check 7's term-matching): read `## Open questions` from each meta-synthesis below and list every bullet verbatim in the lint report under a section header `## §18 Open architecture questions`, with the source synthesis named for each bullet. No term-matching, no resolution attempts, no proposed answers; just visibility.
 
 **Meta-syntheses currently in scope** (hardcoded list; if it grows beyond ~5 pages, consider migrating to a `meta_synthesis: true` frontmatter flag and rewriting to scan by flag):
 
-- `wiki/sources/Vaultens skjema og operasjoner.md`
-- `wiki/syntheses/Vaultens nåværende tilstand.md`
-- `wiki/syntheses/Arkitekturbeslutninger for vaulten.md`
+- _(none yet — a fresh template ships with no meta-syntheses. Add pages here as you file syntheses that aggregate the vault's own open architectural questions.)_
 
-If a listed page does not exist, skip silently. If a listed page exists but has no `## Åpne spørsmål` section, note "(no open questions)" in §18.
+If a listed page does not exist, skip silently. If a listed page exists but has no `## Open questions` section, note "(no open questions)" in §18.
 
 ## Phase 3: Write the report
 

@@ -20,7 +20,7 @@ If multiple inbox files are involved, **process one at a time** (per the user's 
 
 ## Phase 0: Plan-before-run gate and exclusion gate
 
-**Model-awareness at start-up (per CLAUDE.md B.4.0).** State the model this ingest is running on in your opening line. Stay silent on any workhorse-or-better tier (Sonnet, Opus, GPT-5.5, GPT-5.3-Codex and equivalents all do the job); do not nag. Add a one-line note only if the model is at the weakest tier that collapses Norwegian prose (Haiku-class per `meta/vault-config.md`), e.g. *"kjører på <modell>, som er under prosa-baren for ingest; vurder en sterkere modell eller re-ingest senere."* Awareness, not a gate: do not block. For batch / multi-source ingest, confirm model + effort inside the plan-before-run paragraph below instead of noting per source.
+**Model-awareness at start-up (per CLAUDE.md B.4.0).** State the model this ingest is running on in your opening line. Stay silent on any workhorse-or-better tier (Sonnet, Opus, GPT-5.5, GPT-5.3-Codex and equivalents all do the job); do not nag. Add a one-line note only if the model is at the weakest tier that collapses prose (Haiku-class per `meta/vault-config.md`), e.g. *"running on <model>, which is below the prose bar for ingest; consider a stronger model or re-ingest later."* Awareness, not a gate: do not block. For batch / multi-source ingest, confirm model + effort inside the plan-before-run paragraph below instead of noting per source.
 
 **Plan-before-run.** Per CLAUDE.md B.4.0: if this invocation will touch more than ~15 wiki pages, or will run ingest/re-ingest on more than one source, present a one-paragraph plan first (scope, expected touches, risks) and wait for go. Single-source ingest of a normal transcript (one source page + ~10 entity/concept touches) does not need a plan.
 
@@ -73,19 +73,19 @@ Check whether `wiki/sources/<derived-filename>.md` already exists. Two paths:
 1. **Read the source completely** before writing anything. Don't skim.
 1a. **Read `wiki/tags.md`** so the current tag universe is fresh. You'll use it both for tagging the new source and for spotting sub-tag candidates in step 7a.
 2. **Create `wiki/sources/<source-page-name>.md`** per CLAUDE.md B.3:
-   - **Apply any user steering and keep the source type visible** (CLAUDE.md B.3 "User notes and source provenance"). If the source had a user-comment field, let it weight `## Nøkkelpåstander`, the ingress, and ordering, and turn the user's stated connections into concrete cross-reference / tag / synthesis-seed candidates (pointers, not dictation). **It is additive emphasis, not a filter:** curate the whole source comprehensively first, then let the note lift and order — don't tunnel onto only the flagged points or skip what the user didn't mention (including anything that complicates the user's take). Record the source type neutrally in the infobox `Type` (talk / paper / article / idea-note / dialogue / clipping) so established fact stays distinguishable from the source's own assertion. For user-authored notes/dialogues, curate as a normal source: provenance as a neutral type, never a reliability disclaimer (CLAUDE.md B.10).
-   - **Write to the four-bucket writing standard.** Short checklist (full standard in `meta/vaultos-lang-no.md`, "Skrive- og strukturstandard"): **Struktur:** definer i første setning · viktigst først · én side, ett tema · lenk inline. **Klarhet:** stranger-test · definer fagord én gang. **Prosa:** aktivt, hele setninger · ingen anti-mønstre. **Innhold:** attribuer · ingen datostempling · sitater peker til kilder, ikke raw.
+   - **Apply any user steering and keep the source type visible** (CLAUDE.md B.3 "User notes and source provenance"). If the source had a user-comment field, let it weight `## Key claims`, the lead, and ordering, and turn the user's stated connections into concrete cross-reference / tag / synthesis-seed candidates (pointers, not dictation). **It is additive emphasis, not a filter:** curate the whole source comprehensively first, then let the note lift and order — don't tunnel onto only the flagged points or skip what the user didn't mention (including anything that complicates the user's take). Record the source type neutrally in the infobox `Type` (talk / paper / article / idea-note / dialogue / clipping) so established fact stays distinguishable from the source's own assertion. For user-authored notes/dialogues, curate as a normal source: provenance as a neutral type, never a reliability disclaimer (CLAUDE.md B.10).
+   - **Write to the four-bucket writing standard.** Short checklist (full standard in `meta/vaultos-lang-en.md`, "Writing & structure standard"): **Structure:** define in the first sentence · most important first · one page, one topic · link inline. **Clarity:** stranger test · define each term once. **Prose:** active, full sentences · no anti-patterns. **Content:** attribute · no datestamping · citations point to sources, not raw.
    - Frontmatter shape (kind, title, dates, ingest_model, source_path as a list, tags); see B.3.
    - **First line: one-sentence summary that passes the stranger test** (B.3). Lead with what the source argues / covers; attribution after. If a reader has to know the speaker to parse the sentence, rewrite it.
-   - **`[!infobox]` callout at the top** per B.3, default-on for source pages. Content: Type / Speaker (or Author) / Date+venue / `## Nøkkelbegreper` with 3-5 short definitions of vocabulary the body uses. **Do not duplicate Key claims into the infobox**; those live in the body's `## Nøkkelpåstander` section. The infobox is at-a-glance orientation, not a tl;dr. Skip only if the page is trivially short with no specialized vocabulary.
-   - Standard sections: `## Nøkkelpåstander`, `## Kontekst`, `## Åpne spørsmål`, `## Kryssreferanser` (skip sections that don't apply).
-   - If `source_path` points into `raw/transcripts/`, add the transcript extension sections (`## Talere`, `## Metadata for foredraget`, `## Tidsstemplede høydepunkter`, optional `## Spørsmål og svar`) between `## Kontekst` and `## Åpne spørsmål`. See B.3.
+   - **`[!infobox]` callout at the top** per B.3, default-on for source pages. Content: Type / Speaker (or Author) / Date+venue / `## Key terms` with 3-5 short definitions of vocabulary the body uses. **Do not duplicate Key claims into the infobox**; those live in the body's `## Key claims` section. The infobox is at-a-glance orientation, not a tl;dr. Skip only if the page is trivially short with no specialized vocabulary.
+   - Standard sections: `## Key claims`, `## Context`, `## Open questions`, `## Cross-references` (skip sections that don't apply).
+   - If `source_path` points into `raw/transcripts/`, add the transcript extension sections (`## Speakers`, `## Talk metadata`, `## Timestamped highlights`, optional `## Q&A`) between `## Context` and `## Open questions`. See B.3.
    - Callouts per B.3 discipline (2–5 per source page ceiling; semantic types only). The `[!infobox]` doesn't count against the 2-5 body-callout ceiling. It's structural, not content.
 3. **Update or create entity pages** for every named thing the source meaningfully discusses (people, orgs, products, named events). Add the new source to each entity's `sources:` frontmatter and add a paragraph wherever the new source advances that entity's story. For new entities, create the page with frontmatter per B.3 (including `entity_type:` from the `meta/vault-config.md` enum): **first line passes the stranger test**, **`[!infobox]` at the top** with Type / Role / Affiliations / top sources / Key terms (default-on).
 4. **Update or create concept pages** for every concept the source meaningfully discusses or extends. New concept pages: **first line passes the stranger test**, **`[!infobox]` at the top** with one-line definition / argued-by-N-sources / Related concepts / Key terms (default-on).
 5. **Cross-reference contradictions.** If the source contradicts an existing claim in another page, use `> [!warning] Conflict` per B.3. Don't pick a side silently.
-6. **Role-label cross-references.** In `## Kryssreferanser`, avoid bare "see also" links. When this source belongs with sibling sources or concepts, name the role: "framework layer of the same argument", "contrasting position on X", "runtime example of Y". These labels are synthesis seeds.
-6b. **Reciprocal-link audit.** After filing outbound `## Kryssreferanser`, walk back through the 2–3 most relevant existing pages and ask: "should they point back here?" The wiki-ingest workflow is naturally outbound-heavy: new pages get rich kryssreferanser, but existing pages don't update unless explicitly touched. A 2-minute reciprocal-audit closes the silent gap that Check 5 (Missing Cross-References) later flags. Check: the hub-page closest to this source (the entity who said the thing, the parent concept), sibling sources in the same cluster, and any synthesis pages that argue against or alongside. Add 1-line tilbake-lenker where they're missing.
+6. **Role-label cross-references.** In `## Cross-references`, avoid bare "see also" links. When this source belongs with sibling sources or concepts, name the role: "framework layer of the same argument", "contrasting position on X", "runtime example of Y". These labels are synthesis seeds.
+6b. **Reciprocal-link audit.** After filing outbound `## Cross-references`, walk back through the 2–3 most relevant existing pages and ask: "should they point back here?" The wiki-ingest workflow is naturally outbound-heavy: new pages get rich kryssreferanser, but existing pages don't update unless explicitly touched. A 2-minute reciprocal-audit closes the silent gap that Check 5 (Missing Cross-References) later flags. Check: the hub-page closest to this source (the entity who said the thing, the parent concept), sibling sources in the same cluster, and any synthesis pages that argue against or alongside. Add 1-line tilbake-lenker where they're missing.
 7. **Post-ingest synthesis reflection.** Before logging, ask whether this source makes a 3+ source cluster visible, adds a new vantage to an existing cluster, or leaves a near-threshold idea. If yes, record it as a possible synthesis direction in the log. **Do not create a synthesis page during ingest.**
 7a. **Post-ingest tag reflection.** Per CLAUDE.md B.3 tag budget (1 hovedtag + 0–3 sub-tags, max 4 total). Apply hovedtag when fit is clear. Then ask: does this source share a bridge-theme with ≥2 existing pages that would benefit from a sub-tag that doesn't yet exist? If yes, propose the new sub-tag: add it to `wiki/tags.md` with a one-line definition under its nearest hovedtag, apply to this source plus the matching existing pages. Don't create one-page tags or descriptive duplicates of what wikilinks already convey.
 8. **Update `wiki/index.md`:** add the new source under `## Sources`, and any new entities/concepts under their sections. One bullet per item, one line per bullet (see existing index for format).
@@ -96,7 +96,7 @@ Check whether `wiki/sources/<derived-filename>.md` already exists. Two paths:
    ```
 10. **Report what changed.** List every page created or modified. That makes audit easy. Don't ask permission for individual entity/concept page creations; per CLAUDE.md B.5, that's the design.
 
-Skip steps that don't apply. Don't fabricate placeholder content. If a concept is mentioned but you don't have enough context for a real page, log it under `## Åpne spørsmål` on the source page and move on.
+Skip steps that don't apply. Don't fabricate placeholder content. If a concept is mentioned but you don't have enough context for a real page, log it under `## Open questions` on the source page and move on.
 
 ## Phase 4: Re-ingest (diff-and-reconcile)
 
@@ -159,48 +159,48 @@ tags: []
 
 > [!infobox]
 > **Type:** talk / paper / article
-> **Foredragsholder/forfatter:** [[<Name>]] (<role/org>)
-> **Dato:** YYYY-MM-DD, <venue>
+> **Speaker/author:** [[<Name>]] (<role/org>)
+> **Date:** YYYY-MM-DD, <venue>
 >
-> ## Nøkkelbegreper
+> ## Key terms
 > - **<Term>:** one-line definition
 > - **<Term>:** one-line definition
 
 <One-sentence summary that passes the stranger test. Lead with what the source argues or covers; attribution after.>
 
-## Nøkkelpåstander
+## Key claims
 
 - ...
 
-## Kontekst
+## Context
 
 <Background that helps but isn't core to the claims.>
 
 <!-- For transcripts only: insert between Context and Open questions -->
 
-## Talere
+## Speakers
 
 - <name>: <role>
 
-## Metadata for foredraget
+## Talk metadata
 
 - Venue · Date · Event · Original recording link
 
-## Tidsstemplede høydepunkter
+## Timestamped highlights
 
 - [HH:MM:SS] <speaker>: <claim or quote>
 
-## Spørsmål og svar
+## Q&A
 
 <Optional. Per-turn attribution.>
 
 <!-- End transcript extension -->
 
-## Åpne spørsmål
+## Open questions
 
 - ...
 
-## Kryssreferanser
+## Cross-references
 
 - ...
 ```
@@ -222,14 +222,14 @@ tags: []
 
 > [!infobox]
 > **Type:** <entity_type> (person / org / product / work / place / event / dataset / publication)
-> **Rolle:** what they're known for, in one line
-> **Tilknytninger:** [[<org>]] · [[<event>]]
+> **Role:** what they're known for, in one line
+> **Affiliations:** [[<org>]] · [[<event>]]
 >
-> ## Kilder
+> ## Sources
 > - [[<source slug>]]
 > - [[<source slug>]]
 >
-> ## Nøkkelbegreper
+> ## Key terms
 > - **<Term>:** one-line definition
 > - **<Term>:** one-line definition
 
@@ -253,11 +253,11 @@ tags: []
 ---
 
 > [!infobox]
-> **Kort definisjon:** one-line, can be formula-like
-> **Argumentert av:** N sources: [[<source slug>]] · [[<source slug>]]
-> **Relatert:** [[<sister concept>]] · [[<sister concept>]]
+> **Short definition:** one-line, can be formula-like
+> **Argued by:** N sources: [[<source slug>]] · [[<source slug>]]
+> **Related:** [[<sister concept>]] · [[<sister concept>]]
 >
-> ## Nøkkelbegreper
+> ## Key terms
 > - **<Term>:** one-line definition
 > - **<Term>:** one-line definition
 
@@ -277,5 +277,5 @@ tags: []
 - **Bump `updated` and `ingest_model`** on every edit to an existing page.
 - **`sources:` and `source_path:` are always block-style lists,** even with one entry.
 - **Same-source dedup:** if two raw files describe the same underlying source, both `source_path:` entries live on one wiki source page (CLAUDE.md B.6).
-- **Anti-AI-prosa per §A.6 + naturlig norsk per pakka:** sjekk bullets og infobox-tekst for tankestrek, telegram-stil, kontrastiv negasjon ("det er X, ikke Y, som …") og latinske nominaliseringer ("kodifikator") før du logger. Disse er de hyppigste LLM-tic-ene i wiki-prosa.
+- **Anti-AI prose per §A.6 + the wiki language's idioms per the pack:** check bullets and infobox text for em-dashes, telegraphic style, reflexive contrastive negation ("it's not X, but Y"), and Latinate nominalizations before logging. These are the most frequent LLM tics in wiki prose.
 ```

@@ -38,8 +38,8 @@ Read only enough of the vault to propose candidates. Do not write files.
 
 1. Read `wiki/log.md` tail for recent cluster notes and possible synthesis directions.
 2. List `wiki/syntheses/` and skim titles/frontmatter so existing syntheses are not duplicated.
-3. Scan recent or relevant source pages' `## Kryssreferanser` sections for repeated co-occurrences and role labels.
-4. When relevant, inspect concept pages for source-bullet tallies such as `## Argued by` / Norwegian equivalents.
+3. Scan recent or relevant source pages' `## Cross-references` sections for repeated co-occurrences and role labels.
+4. When relevant, inspect concept pages for source-bullet tallies such as `## Argued by` / the wiki language's equivalent.
 5. Propose 3-5 candidates. Each candidate must include:
    - source basis: 3+ source wikilinks when available;
    - thesis: the position the sources jointly support;
@@ -56,9 +56,9 @@ This mode mutates wiki files, so follow CLAUDE.md write safety and plan-before-r
 3. Structure the body around the argument:
    - shared diagnosis first;
    - labeled vantages, positions, or layers next;
-   - `## Hvor klyngen er stille` or `## Åpne spørsmål` for what the sources do not address;
-   - `## Kryssreferanser` for adjacent concepts, sources, and syntheses.
-4. Update every cited source page's `## Kryssreferanser` with a one-line backlink to the synthesis naming that source's role in the synthesis.
+   - `## Where the cluster is silent` or `## Open questions` for what the sources do not address;
+   - `## Cross-references` for adjacent concepts, sources, and syntheses.
+4. Update every cited source page's `## Cross-references` with a one-line backlink to the synthesis naming that source's role in the synthesis.
 5. Add the synthesis to `wiki/index.md` under `## Syntheses`.
 6. Append a narrative `wiki/log.md` entry: `## [YYYY-MM-DD] synthesis | <title>`, naming the thesis, sources used, and any nearby synthesis ideas left open.
 7. Read back every edited file before reporting completion.
