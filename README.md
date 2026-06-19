@@ -1,8 +1,10 @@
 # VaultOS
 
-A shared knowledge vault. You drop sources; the AI organizes everything else.
+A knowledge vault. You drop sources; the AI organizes everything else. (Solo by default; a shared, multi-colleague mode is a setup option.)
 
 Built on Andrej Karpathy's [LLM Wiki pattern](meta/LLM%20Wiki%20-%20Karpathy.md): instead of asking the AI questions about a pile of documents, the AI incrementally builds and maintains a structured wiki between you and the raw sources. The wiki compounds with every source you add.
+
+**It's your fork.** This is a starting point, not a straitjacket. Clone it, rip out what you don't want, change the language, rewrite the schema, drop skills — it's MIT-licensed and it's yours. The setup wizard tailors it to you; everything past that is your call.
 
 ## First-time setup
 
@@ -85,7 +87,7 @@ tools/    Helper scripts (PDF→Markdown, lint pre-pass, image optimizer).
 
 You never write to `wiki/` directly. The AI is the sole author there. Humans only add to `inbox/` and ask questions.
 
-Beyond the core loop, topic-triggered **specialized skills** kick in when relevant: bulk media-log imports (`media-log-ingest`, for Goodreads/Letterboxd/Kindle exports), poem analysis (`dikt-analyse-norsk`), and analytical parables (`wiki-parable`). You don't invoke them by name — they trigger from what you ask.
+Beyond the core loop, topic-triggered **specialized skills** kick in when relevant: bulk media-log imports (`media-log-ingest`, for Goodreads/Letterboxd/Kindle exports) and analytical parables (`wiki-parable`). You don't invoke them by name — they trigger from what you ask. A couple of Norwegian-specific skills also ship for vaults that choose Norwegian at setup (poem analysis `dikt-analyse-norsk`, the `norsk-prosa` reviewer); they sit dormant otherwise.
 
 A small **automation layer** runs quietly in the background (Claude Code only): hooks that bump the `updated:` date on edited pages, guard protected files, and keep the non-Claude agent mirror in sync. They need `python` on the PATH; if it's missing they simply no-op and nothing breaks.
 

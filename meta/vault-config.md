@@ -3,9 +3,10 @@
 > **Imported by `CLAUDE.md` via `@import`. Not a wiki page.** No `kind:` frontmatter; outside wiki operations (§B.2). This file holds *this vault's instance parameters*: the values that instantiate the portable VaultOS pattern for this specific vault. The pattern (rules) lives in `CLAUDE.md` Part B; this file holds only the values those rules point into. Norwegian language/form details live in the swappable pack `meta/vaultos-lang-no.md`.
 
 ## Language
-- **Wiki content** (`wiki/` page bodies, summaries, index/log entries, source pages): **Norwegian**.
+- **Wiki content** (`wiki/` page bodies, summaries, index/log entries, source pages): **English** (the shipped default; set at setup). The active form pack is `meta/vaultos-lang-en.md`.
 - **Meta/operational docs** (`CLAUDE.md`, `AGENTS.md`, `meta/**`, skills): **English**, unless the user explicitly requests otherwise.
-- Sources may arrive in any language; wiki summaries are normalized to Norwegian.
+- Sources may arrive in any language; wiki summaries are normalized to the wiki language.
+- **Choosing another wiki language at setup** swaps in that language's pack (a Norwegian pack ships as `meta/vaultos-lang-no.md`) and regenerates the language-specific layer; see `first-time.md` Phase 2.
 
 ## Collaboration mode (solo / shared)
 Set at setup; governs the §B.1 premises and §B.6 dedup / multi-author handling.
