@@ -2,6 +2,8 @@
 
 A pattern for building personal knowledge bases using LLMs.
 
+> Source: Andrej Karpathy, "LLM Wiki" — public GitHub Gist, April 2026: <https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f>
+
 This is an idea file, it is designed to be copy pasted to your own LLM Agent (e.g. OpenAI Codex, Claude Code, OpenCode / Pi, or etc.). Its goal is to communicate the high level idea, but your agent will build out the specifics in collaboration with you.
 
 ## The core idea

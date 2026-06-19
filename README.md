@@ -101,7 +101,7 @@ A small **automation layer** runs quietly in the background (Claude Code only): 
 
 - **`CLAUDE.md`** — the full operational schema. Auto-loaded by Claude Code; you can read it yourself to understand the rules.
 - **`meta/vaultos-manifest.md`** — what counts as portable VaultOS vs instance content (the package boundary).
-- **`meta/LLM Wiki - Karpathy.md`** — Karpathy's original pattern this vault implements.
+- **`meta/LLM Wiki - Karpathy.md`** — Karpathy's original pattern this vault implements, reproduced from his public gist: [gist.github.com/karpathy/442a6bf…](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f).
 - **`.claude/`** — the agent layer: skills (the operations), hooks (the background automation), subagents, and settings.
 - **`tools/`** — standalone helper scripts (run by hand): `pdf2md.py`, `lint-scan.py`, `optimize-images.py`. See `tools/README.md`.
 - **`wiki/log.md`** — chronological record of every operation the AI has performed.

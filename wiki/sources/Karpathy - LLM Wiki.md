@@ -15,6 +15,7 @@ tags:
 > **Forfatter**: [[Andrej Karpathy]]
 > **Rolle i vaulten**: prinsippkilden for et persistent, LLM-vedlikeholdt wiki som mellomlag mellom råkilder og spørsmål — mønsteret denne vaulten implementerer
 > **Kilde**: `raw/articles/2026-05-22_llm_wiki_karpathy.md`
+> **Original**: [Karpathys offentlige gist (april 2026)](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
 
 Karpathy - LLM Wiki beskriver et mønster der en LLM ikke bare søker i dokumenter ved query-time, men bygger og vedlikeholder et persistent markdown-wiki som kompilert kunnskap.
 
@@ -41,3 +42,4 @@ Dette er den direkte arkitekturkilden for selve vault-mønsteret: `inbox`/`raw`/
 ## Kryssreferanser
 
 - [[Andrej Karpathy]] — forfatter
+- [Karpathys LLM Wiki-gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) — den offentlige originalkilden teksten er gjengitt fra

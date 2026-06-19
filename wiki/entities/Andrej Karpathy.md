@@ -27,3 +27,4 @@ Karpathy doktorerte ved Stanford under Fei-Fei Li, var medgründer av OpenAI (20
 ## Kryssreferanser
 
 - [[Karpathy - LLM Wiki]] — essayet om LLM Wiki-mønsteret (seed-kilden i denne malen)
+- [LLM Wiki-gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) — Karpathys offentlige originaldokument
