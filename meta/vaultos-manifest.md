@@ -91,7 +91,6 @@ Created fresh in the template.
 Never leaves the live vault — instance, personal, or session state.
 
 - `personal/**` — health/finance/private (the wizard creates a fresh personal layer on demand if the recipient wants one).
-- `ARCHITECTURE.md` — architecture working doc (instance).
 - `meta/plan.md`, `meta/backlog.md` — this vault's history/deferred work.
 - `meta/handovers/`, `meta/ideas/`, `meta/history/`, `meta/plan archive/`, `meta/telegram-mvp/`, `meta/feedback/` — session journals, working notes, idea drafts, architecture proposals. The durable patterns already live in `CLAUDE.md` + skills, so nothing of value is lost.
 - `.claude/skills/tufte-claude-skill/` — third-party; offered via the wizard, not bundled.

@@ -1,0 +1,20 @@
+{
+ "_note": "Seed film->regissor-attribuering for Letterboxd-ingest. Dette er DATA, ikke fasit: LLM-en leser den som utgangspunkt og utvider den for nye/ukjente titler. Ikke frosset. Skipes som en liten seed i template-en; den akkumulerer per vault etter hvert som du ingester.",
+ "directors": {
+  "Stanley Kubrick": [
+   "2001: A Space Odyssey (1968)",
+   "Barry Lyndon (1975)",
+   "A Clockwork Orange (1971)",
+   "The Shining (1980)"
+  ],
+  "Akira Kurosawa": [
+   "Seven Samurai (1954)",
+   "Rashomon (1950)",
+   "Ran (1985)"
+  ],
+  "Agnès Varda": [
+   "Cléo from 5 to 7 (1962)",
+   "Vagabond (1985)"
+  ]
+ }
+}

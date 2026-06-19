@@ -1,0 +1,4 @@
+interface:
+  display_name: "Wiki Parable"
+  short_description: "Create analytical wiki parables."
+  default_prompt: "Use $wiki-parable to create a wiki-parable about"

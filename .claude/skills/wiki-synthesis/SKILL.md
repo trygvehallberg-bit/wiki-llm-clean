@@ -11,15 +11,15 @@ This skill is procedure. **All conventions live in [CLAUDE.md](../../../CLAUDE.m
 
 ## Mode selection
 
-Default to **Mode A — idea synthesis** unless the user's wording clearly asks for vault content or file creation.
+Default to **Mode A: idea synthesis** unless the user's wording clearly asks for vault content or file creation.
 
-Use **Mode B — vault-backed survey** only when the user says things like "from the vault", "using existing sources", "scan the vault", "what syntheses are writable now", or asks for candidates from existing wiki content.
+Use **Mode B: vault-backed survey** only when the user says things like "from the vault", "using existing sources", "scan the vault", "what syntheses are writable now", or asks for candidates from existing wiki content.
 
-Use **Mode C — file selected synthesis** only when the user explicitly asks to file/write/create a wiki synthesis page, or picks a candidate from Mode B and asks you to write it.
+Use **Mode C: file selected synthesis** only when the user explicitly asks to file/write/create a wiki synthesis page, or picks a candidate from Mode B and asks you to write it.
 
 If the user says only "create synthesis" or "make synthesis", do **not** scan the vault. Generate ideas.
 
-## Mode A — Idea synthesis
+## Mode A: Idea synthesis
 
 No file writes. No vault scan unless the user asks for it or gives a specific note/source to read.
 
@@ -32,7 +32,7 @@ No file writes. No vault scan unless the user asks for it or gives a specific no
 3. Prefer sharp positions over topic labels. Reject "these things are all about X" as too weak.
 4. End by asking which candidate to develop if a choice is needed. Do not offer to file a wiki page unless the user asks.
 
-## Mode B — Vault-backed survey
+## Mode B: Vault-backed survey
 
 Read only enough of the vault to propose candidates. Do not write files.
 
@@ -47,12 +47,12 @@ Read only enough of the vault to propose candidates. Do not write files.
    - distinction: why this is not already covered by an existing synthesis.
 6. Wait for the human to pick before filing.
 
-## Mode C — File selected synthesis
+## Mode C: File selected synthesis
 
 This mode mutates wiki files, so follow CLAUDE.md write safety and plan-before-run thresholds.
 
 1. Confirm the selected candidate has a thesis and source basis. If fewer than 3 source pages support it, either keep it as an idea or ask whether the user wants a provisional synthesis.
-2. Create `wiki/syntheses/<Descriptive title in sentence case>.md` with `kind: synthesis`, block-style `sources:`, tags from `wiki/tags.md` when clear, and a first line that states the thesis. Set `trigger_skill: wiki-synthesis` and `trigger_mode:` based on how this filing arrived: `user-requested` if the user explicitly asked, `user-selected` if they picked from a slate, `agent-followon` only if you inferred filing from context (rare for this skill — most paths through `wiki-synthesis` are user-requested or user-selected). See CLAUDE.md §B.4.1 for the field semantics.
+2. Create `wiki/syntheses/<Descriptive title in sentence case>.md` with `kind: synthesis`, block-style `sources:`, tags from `wiki/tags.md` when clear, and a first line that states the thesis. Set `trigger_skill: wiki-synthesis` and `trigger_mode:` based on how this filing arrived: `user-requested` if the user explicitly asked, `user-selected` if they picked from a slate, `agent-followon` only if you inferred filing from context (rare for this skill; most paths through `wiki-synthesis` are user-requested or user-selected). See CLAUDE.md §B.4.1 for the field semantics.
 3. Structure the body around the argument:
    - shared diagnosis first;
    - labeled vantages, positions, or layers next;
