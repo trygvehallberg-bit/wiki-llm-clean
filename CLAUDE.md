@@ -123,9 +123,9 @@ Pointers an incoming session should hit before non-trivial work:
 
 ## B.1 Purpose and premises
 
-- **Shared.** Multiple colleagues drop sources; one wiki emerges.
-- **Multi-author at the human layer, single-author at the wiki layer.** Humans only write to `raw/`. You are the sole author of everything in `wiki/`.
-- **Hands-off ingest.** Colleagues trigger ingest without per-source steering. This schema must be precise enough that you don't need to guess.
+- **Collaboration mode (solo / shared) is a setup parameter; see `meta/vault-config.md`.** **Shared:** multiple colleagues drop sources and one wiki emerges (dedup + multi-author handling, §B.6, apply). **Solo:** a single person's vault. In both modes the **wiki layer is single-author** — humans (one or several) only write to `raw/`, and you are the sole author of everything in `wiki/`.
+- **Canonical instruction file (CLAUDE.md / AGENTS.md) is a setup parameter; see `meta/vault-config.md` and §B.12.** One file holds the full schema; the other is a thin pointer to it. The choice follows the primary AI tool (Claude Code → `CLAUDE.md`; Codex or other → `AGENTS.md`).
+- **Hands-off ingest.** Whoever triggers ingest does so without per-source steering. This schema must be precise enough that you don't need to guess.
 - **Dynamic.** Old sources get re-ingested as models improve. Wiki pages record which model last touched them.
 - **Norwegian wiki, English meta.** Sources may arrive in any language; wiki content (`wiki/` page bodies, summaries, index entries, log entries, source pages) is written in Norwegian. Operational/meta documentation (`CLAUDE.md`, `AGENTS.md`, `meta/plan.md`, `meta/backlog.md`, this first-run plan, skills) stays in English unless explicitly requested otherwise. (Language is a per-vault parameter; see `meta/vault-config.md`. The Norwegian form details live in the swappable pack `meta/vaultos-lang-no.md`.)
 
@@ -134,7 +134,7 @@ Pointers an incoming session should hit before non-trivial work:
 ```
 Personal Notes 2/
 ├── CLAUDE.md        ← this file
-├── AGENTS.md        ← pointer for non-Claude agents (read-only)
+├── AGENTS.md        ← default pointer to CLAUDE.md; canonical/pointer roles swap at setup (§B.12)
 ├── handoff.md       ← State layer: current ongoing work and next step, updated every session
 ├── todo.md          ← State layer: short mutable task list for current/remote follow-up
 ├── .claude/         ← Claude Code config (see B.4, B.13)
@@ -438,7 +438,7 @@ Part A says "minimum work, nothing speculative" and "touch only what you must." 
 ## B.6 Dedup and multi-colleague
 
 - If two `raw/` files describe the same underlying thing, both files stay (raw is immutable). The `wiki/sources/` page is shared: same slug, both paths appear in the `source_path:` list (which is always a list, see B.3), body merges both reads with a note about the duplication.
-- Colleagues share the live vault through Obsidian Sync. Git history is a secondary audit trail of the snapshots you commit, taken when you ask, not one commit per operation (see B.7).
+- In **shared** mode, colleagues share the live vault through Obsidian Sync; in **solo** mode it is simply your own sync. Git history is a secondary audit trail of the snapshots you commit, taken when you ask, not one commit per operation (see B.7).
 
 ## B.7 Commits
 
@@ -529,7 +529,7 @@ Some files define the operating rules rather than ordinary vault content. They n
 
 **Protected: require explicit human accept before editing**
 - `CLAUDE.md`
-- `AGENTS.md` (read-only pointer; do not edit unless the human explicitly asks for that file)
+- `AGENTS.md` — by default the read-only pointer to the canonical `CLAUDE.md`. Which of the two is canonical (full schema) vs. pointer is a setup parameter (`meta/vault-config.md` → "Canonical instruction file"); the setup wizard performs any swap. During normal work, treat the **pointer** file as read-only and edit the **canonical** file for schema changes — and even that only on explicit human accept.
 - `.claude/skills/**`
 - `meta/plan.md`, `meta/backlog.md`, and other schema/workflow design notes in `meta/`
 - `.obsidian/**` settings and snippets, unless the user is explicitly asking for Obsidian UI/config work

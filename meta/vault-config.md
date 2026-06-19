@@ -1,4 +1,4 @@
-# Vault config: Personal Notes 2
+# Vault config
 
 > **Imported by `CLAUDE.md` via `@import`. Not a wiki page.** No `kind:` frontmatter; outside wiki operations (§B.2). This file holds *this vault's instance parameters*: the values that instantiate the portable VaultOS pattern for this specific vault. The pattern (rules) lives in `CLAUDE.md` Part B; this file holds only the values those rules point into. Norwegian language/form details live in the swappable pack `meta/vaultos-lang-no.md`.
 
@@ -6,6 +6,20 @@
 - **Wiki content** (`wiki/` page bodies, summaries, index/log entries, source pages): **Norwegian**.
 - **Meta/operational docs** (`CLAUDE.md`, `AGENTS.md`, `meta/**`, skills): **English**, unless the user explicitly requests otherwise.
 - Sources may arrive in any language; wiki summaries are normalized to Norwegian.
+
+## Collaboration mode (solo / shared)
+Set at setup; governs the §B.1 premises and §B.6 dedup / multi-author handling.
+- **`solo`** — a single person's vault; one author drops sources.
+- **`shared`** — multiple colleagues drop sources into one shared wiki; dedup (§B.6) and multi-author handling are active.
+
+Either mode keeps the **wiki layer single-author** (the agent). Current: **`solo`** (the setup wizard sets this).
+
+## Canonical instruction file (CLAUDE.md / AGENTS.md)
+Which file holds the full schema; the other is a thin pointer to it. Set at setup from the user's primary AI tool (§B.12).
+- **`CLAUDE.md`** — canonical for Claude Code, which auto-loads it and resolves the `@import` lines. `AGENTS.md` is the pointer.
+- **`AGENTS.md`** — canonical for Codex and other tools that auto-load `AGENTS.md`. `CLAUDE.md` becomes the pointer. Claude Code's `@import` resolves only in `CLAUDE.md`, so when `AGENTS.md` is canonical the parameter files (`vault-config.md`, the language pack) are referenced by path rather than `@import`-ed.
+
+Current: **`CLAUDE.md`**.
 
 ## Hovedtags (top-level domains)
 Canonical **live** registry: `wiki/tags.md`. Read it before tagging. Current hovedtags:

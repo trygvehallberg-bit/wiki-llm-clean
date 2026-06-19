@@ -26,18 +26,21 @@ Conversational, a few at a time, with the suggested options. The first is the on
 2. **Meta language** — *cosmetic.* Keep the operational docs (CLAUDE.md, skills, meta) in English (recommended — the tested baseline), or translate them to the wiki language? Translation takes a while and has **no practical effect** on how the vault works; purely reading comfort.
 3. **Tone** — how should wiki prose read? (Neutral/encyclopedic · Conversational · Academic-dense.)
 4. **Purpose** — what is this vault for? (Personal knowledge · Research/field · Work domain · Mixed — free text welcome.)
-5. **Solo or shared** — one user, or several colleagues dropping sources? (Affects dedup + multi-author handling.)
-6. **Standard categories** — home-page cards + hovedtags. Offer the starter set in `wiki/tags.md`; let them edit/add.
-7. **Source types** — what will they mostly feed? (articles / podcasts / papers / books.) Tunes triage defaults.
-8. **Personal layer?** — want a private folder the wiki and agent never touch (health, finance, private notes)? Yes/No. If yes: what should it be called? (default `personal`.)
-9. **Vault name** — what should this vault be called? (Free text; suggest something from their purpose/categories; fallback "VaultOS".)
-10. **License** — how should the vault content be licensed? (MIT · CC BY 4.0 · CC0 · All rights reserved.) Skip if it stays private/personal.
-11. **Tufte viz skill?** — interested in a third-party data-visualization skill? If yes, point them to [aref-vc/tufte-claude-skill](https://github.com/aref-vc/tufte-claude-skill) (credit the author) with its install command. It is **not** bundled here.
+5. **Solo or shared** — one user, or several colleagues dropping sources? (Sets the **collaboration mode** parameter in `meta/vault-config.md`; governs §B.6 dedup + multi-author handling.)
+6. **Primary AI tool / canonical instruction file** — which tool will mostly drive this vault? **Claude Code** → keep `CLAUDE.md` canonical (default). **Codex or another tool that reads `AGENTS.md`** → make `AGENTS.md` canonical instead. The other file becomes a thin pointer. (Sets the **canonical instruction file** parameter; the swap happens in Phase 2.) If unsure, keep the default.
+7. **Standard categories** — home-page cards + hovedtags. Offer the starter set in `wiki/tags.md`; let them edit/add.
+8. **Source types** — what will they mostly feed? (articles / podcasts / papers / books.) Tunes triage defaults.
+9. **Personal layer?** — want a private folder the wiki and agent never touch (health, finance, private notes)? Yes/No. If yes: what should it be called? (default `personal`.)
+10. **Vault name** — what should this vault be called? (Free text; suggest something from their purpose/categories; fallback "VaultOS".)
+11. **License** — how should the vault content be licensed? (MIT · CC BY 4.0 · CC0 · All rights reserved.) Skip if it stays private/personal.
+12. **Tufte viz skill?** — interested in a third-party data-visualization skill? If yes, point them to [aref-vc/tufte-claude-skill](https://github.com/aref-vc/tufte-claude-skill) (credit the author) with its install command. It is **not** bundled here.
 
 ## Phase 2 — Apply the answers
 
-- Write the answers into `meta/vault-config.md` (wiki language, hovedtags, personal-folder name, vault name, source-type emphasis).
-- **If the wiki language is not Norwegian:** generate `meta/vaultos-lang-<xx>.md` from the pattern in `meta/vaultos-lang-no.md` (section headings, infobox labels, mother-tongue prose rules for that language) and update the `@import` line in CLAUDE.md.
+- Write the answers into `meta/vault-config.md` (wiki language, collaboration mode, canonical instruction file, hovedtags, personal-folder name, vault name, source-type emphasis).
+- **Set the collaboration mode (Q5)** to `solo` or `shared` in `meta/vault-config.md` → "Collaboration mode". No other file changes; §B.1/§B.6 read the parameter.
+- **If they chose `AGENTS.md` as the canonical instruction file (Q6):** move the full schema body from `CLAUDE.md` into `AGENTS.md`, then replace `CLAUDE.md` with the pointer stub (the shipped `AGENTS.md`, with the two filenames swapped). Claude Code's `@import` resolves only in `CLAUDE.md`, so in the now-canonical `AGENTS.md` reference the parameter files (`meta/vault-config.md`, the language pack) by path rather than `@import`-ing them. The default (Claude Code → `CLAUDE.md` canonical) needs no change. Update `meta/vault-config.md` → "Canonical instruction file" either way.
+- **If the wiki language is not Norwegian:** generate `meta/vaultos-lang-<xx>.md` from the pattern in `meta/vaultos-lang-no.md` (section headings, infobox labels, mother-tongue prose rules for that language) and update the `@import` line in the canonical instruction file.
 - **Regenerate the Karpathy seed in the chosen language.** The shipped seed (`wiki/sources/Karpathy - LLM Wiki.md` + the `Andrej Karpathy` entity) is in Norwegian. If the wiki language differs, re-ingest `raw/articles/2026-05-22_llm_wiki_karpathy.md` into the chosen language, replacing those two pages — and let the user watch: it doubles as their first live `ingest` demo.
 - Update `wiki/tags.md` (chosen hovedtags) and the `README.md` title (vault name).
 - **If they chose meta translation:** translate CLAUDE.md, the skills, and the meta docs into the wiki language. Flag that this is the slower path.
