@@ -132,7 +132,7 @@ Pointers an incoming session should hit before non-trivial work:
 ## B.2 Layout
 
 ```
-Personal Notes 2/
+<vault-root>/
 ├── CLAUDE.md        ← this file
 ├── AGENTS.md        ← default pointer to CLAUDE.md; canonical/pointer roles swap at setup (§B.12)
 ├── handoff.md       ← State layer: current ongoing work and next step, updated every session
